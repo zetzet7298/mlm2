@@ -58,6 +58,7 @@ Route::middleware('auth')->group(function () {
         Route::put('security/email', [SecurityController::class, 'changeEmail'])->name('security.changeEmail');
         Route::put('security/password', [SecurityController::class, 'changePassword'])->name('security.changePassword');
         Route::put('security/password2', [SecurityController::class, 'changePassword2'])->name('security.changePassword2');
+        Route::post('security/password2', [SecurityController::class, 'createPassword2'])->name('security.createPassword2');
     });
     // Logs pages
     Route::prefix('log')->name('log.')->group(function () {

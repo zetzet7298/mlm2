@@ -29,6 +29,53 @@
             <!--end::Col-->
         </div>
         <!--end::Row-->
+
+<!--begin::Input group-->
+<div class="row mb-7">
+    <!--begin::Label-->
+    <label class="col-lg-4 fw-bold text-muted">
+        {{ __('Referral Code') }}
+    </label>
+    <!--end::Label-->
+
+    <!--begin::Col-->
+    <div class="col-lg-8 d-flex align-items-center">
+        <!--begin::Input-->
+        <div id="kt_clipboard_4" class="me-5 fw-bolder fs-6 text-dark">{{ auth()->user()->username }}</div>
+        <!--end::Input-->
+
+        <!--begin::Button-->
+        <button class="btn btn-icon btn-sm btn-light" data-clipboard-target="#kt_clipboard_4">
+            <i class="bi bi-copy"></i>
+        </button>
+        <!--end::Button-->
+    </div>
+    <!--end::Col-->
+</div>
+<!--end::Input group-->
+        <!--begin::Input group-->
+        <div class="row mb-7">
+            <!--begin::Label-->
+            <label class="col-lg-4 fw-bold text-muted">
+                {{ __('Referral Link') }}
+            </label>
+            <!--end::Label-->
+
+            <!--begin::Col-->
+            <div class="col-lg-8 d-flex align-items-center">
+                <!--begin::Input-->
+                <div id="kt_clipboard_5" class="me-5">{{ env('APP_URL') . '/register?referer='. auth()->user()->username }}</div>
+                <!--end::Input-->
+    
+                <!--begin::Button-->
+                <button class="btn btn-icon btn-sm btn-light" data-clipboard-target="#kt_clipboard_5">
+                    <i class="bi bi-copy"></i>
+                </button>
+                <!--end::Button-->
+            </div>
+            <!--end::Col-->
+        </div>
+        <!--end::Input group-->
         <!--begin::Row-->
         <div class="row mb-7">
             <!--begin::Label-->
@@ -100,53 +147,9 @@
         </div>
         <!--end::Input group-->
 
-        <!--begin::Input group-->
-        <div class="row mb-7">
-            <!--begin::Label-->
-            <label class="col-lg-4 fw-bold text-muted">
-                {{ __('Referral Code') }}
-            </label>
-            <!--end::Label-->
+        
 
-            <!--begin::Col-->
-            <div class="col-lg-8 d-flex align-items-center">
-                <!--begin::Input-->
-                <div id="kt_clipboard_4" class="me-5">{{ auth()->user()->id }}</div>
-                <!--end::Input-->
-    
-                <!--begin::Button-->
-                <button class="btn btn-icon btn-sm btn-light" data-clipboard-target="#kt_clipboard_4">
-                    <i class="bi bi-copy"></i>
-                </button>
-                <!--end::Button-->
-            </div>
-            <!--end::Col-->
-        </div>
-        <!--end::Input group-->
 
-        <!--begin::Input group-->
-        <div class="row mb-7">
-            <!--begin::Label-->
-            <label class="col-lg-4 fw-bold text-muted">
-                {{ __('Referral Link') }}
-            </label>
-            <!--end::Label-->
-
-            <!--begin::Col-->
-            <div class="col-lg-8 d-flex align-items-center">
-                <!--begin::Input-->
-                <div id="kt_clipboard_5" class="me-5">{{ env('APP_URL') . '/register?referer='. auth()->user()->id }}</div>
-                <!--end::Input-->
-    
-                <!--begin::Button-->
-                <button class="btn btn-icon btn-sm btn-light" data-clipboard-target="#kt_clipboard_5">
-                    <i class="bi bi-copy"></i>
-                </button>
-                <!--end::Button-->
-            </div>
-            <!--end::Col-->
-        </div>
-        <!--end::Input group-->
     </div>
     <!--end::Card body-->
 </div>

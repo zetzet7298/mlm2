@@ -2,7 +2,7 @@
     $nav = array(
         array('title' => 'Overview', 'view' => 'account/overview'),
         array('title' => 'Settings', 'view' => 'account/settings'),
-        array('title' => 'Security', 'view' => 'account/security'),
+        array('title' => 'Password Management', 'view' => 'account/security'),
     );
 @endphp
 

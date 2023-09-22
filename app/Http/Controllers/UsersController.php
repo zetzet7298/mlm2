@@ -26,9 +26,29 @@ class UsersController extends Controller
         $count_direct_users = User::where(['direct_user_id'=>$id])->count();
         $count_indirect_users = User::where(['indirect_user_id'=>$id])->count();
         
+        $children = User::where(['direct_user_id'=>$id])->get();
+        $total_left_child = 0;
+        $total_right_child = 0;
+
+        if(!empty($children)){
+            if (isset($children[0])){
+                $total_left_child = 1;
+                $leftChild = isset($children[0]) ? $children[0] : null;
+                $total_left_child += $this->calcTieredTotal($users, $leftChild->id);
+            }
+            if (isset($children[1])){
+                $total_right_child = 1;
+                $rightChild = isset($children[1]) ? $children[1] : null;
+                $total_right_child += $this->calcTieredTotal($users, $rightChild->id);
+            }
+            // dd($leftChild, $rightChild);
+        }
+        // dd($total_left_child, $total_right_child);
+        // $total_left_child = $this->getTotalChild($users, $id);
+
         $direct_total = $count_direct_users * AccountConstant::DIRECT_COMISSION;
-        $indirect_total = $count_indirect_users * AccountConstant::INDIRECT_COMISSION;
-        unset($user->coin);
+        // $indirect_total = $count_indirect_users * AccountConstant::INDIRECT_COMISSION;
+        $indirect_total = 0;
         $tiered_total = $this->calcTieredTotal($users, $id);
         $gold_total = 0;
         $total = $tiered_total + $direct_total + $indirect_total;
@@ -43,6 +63,21 @@ class UsersController extends Controller
         return response()->json($user);
     }
 
+
+    // public function calcTieredTotal($items, $direct_user_id, $level=0) {
+    //     $total = 0;
+    //     foreach($items as $k => $item){
+    //         if($item['direct_user_id'] == $direct_user_id){
+    //             $item['level'] = $level;
+    //             #bỏ qua ng giới thiệu trực tiếp (con đầu tiên)
+    //             # if item['level'] != 1:
+    //             $total += 1;
+    //             $child = $this->calcTieredTotal($items, $item['id'], $level+1);
+    //             $total += $child;
+    //         }
+    //     }
+    //     return $total;
+    // }
 
     public function calcTieredTotal($items, $direct_user_id, $level=0) {
         $total = 0;

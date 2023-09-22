@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 class AuthenticatedSessionController extends Controller
 {
+    public function username()
+    {
+        return 'username';
+    }
+    
     /**
      * Display the login view.
      *

@@ -355,7 +355,7 @@ return array(
                         'bullet' => '<span class="bullet bullet-dot"></span>',
                     ),
                     array(
-                        'title'      => 'Security',
+                        'title'      => 'Password Management',
                         'path'       => 'account/security',
                         'bullet'     => '<span class="bullet bullet-dot"></span>',
                         // 'attributes' => array(

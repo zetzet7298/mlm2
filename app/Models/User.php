@@ -27,6 +27,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'id',
+        'username',
         'type',
         'first_name',
         'last_name',
@@ -42,7 +43,10 @@ class User extends Authenticatable
         'coin',
         'state',
     ];
-
+    public function username()
+    {
+        return 'username';
+    }
     /**
      * The attributes that should be hidden for arrays.
      *

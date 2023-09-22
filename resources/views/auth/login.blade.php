@@ -29,6 +29,17 @@
         <!--begin::Input group-->
         <div class="fv-row mb-10">
             <!--begin::Label-->
+            <label class="form-label fs-6 fw-bolder text-dark">{{ __('Username') }}</label>
+            <!--end::Label-->
+
+            <!--begin::Input-->
+            <input class="form-control form-control-lg form-control-solid" type="text" name="username" autocomplete="off" value="{{ old('email', 'admin') }}" required autofocus/>
+            <!--end::Input-->
+        </div>
+        <!--end::Input group-->
+        {{-- <!--begin::Input group-->
+        <div class="fv-row mb-10">
+            <!--begin::Label-->
             <label class="form-label fs-6 fw-bolder text-dark">{{ __('Email') }}</label>
             <!--end::Label-->
 
@@ -36,7 +47,7 @@
             <input class="form-control form-control-lg form-control-solid" type="email" name="email" autocomplete="off" value="{{ old('email', 'admin@admin.com') }}" required autofocus/>
             <!--end::Input-->
         </div>
-        <!--end::Input group-->
+        <!--end::Input group--> --}}
 
         <!--begin::Input group-->
         <div class="fv-row mb-10">
@@ -80,7 +91,7 @@
             </button>
             <!--end::Submit button-->
 
-            <!--begin::Separator-->
+            {{-- <!--begin::Separator-->
             <div class="text-center text-muted text-uppercase fw-bolder mb-5">or</div>
             <!--end::Separator-->
 
@@ -96,7 +107,7 @@
                 <img alt="Logo" src="{{ asset(theme()->getMediaUrlPath() . 'svg/brand-logos/facebook-4.svg') }}" class="h-20px me-3"/>
                 {{ __('Continue with Facebook') }}
             </a>
-            <!--end::Facebook link-->
+            <!--end::Facebook link--> --}}
         </div>
         <!--end::Actions-->
     </form>

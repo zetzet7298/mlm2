@@ -46,7 +46,7 @@
                 <!--end::Input group-->
                 <!--begin::Input group-->
                 <div class="fv-row mb-7">
-                    <label class="form-label fw-bolder text-gray-700 fs-6">{{ __('Direct Refferer Code') }}</label>
+                    <label class="form-label fw-bolder text-gray-700 fs-6">{{ __('Direct Refferer Code (Username)') }}</label>
                     @if(!empty(auth()->user()->direct_user_id))
                     <input class="form-control form-control-lg form-control-solid" required type="text" readonly
                         name="direct_user_id" autocomplete="off" value="{{ auth()->user()->direct_user_id }}" />
@@ -59,7 +59,7 @@
 
                 <!--begin::Input group-->
                 <div class="fv-row mb-7">
-                    <label class="form-label fw-bolder text-gray-700 fs-6">{{ __('Indirect Refferer Code') }}</label>
+                    <label class="form-label fw-bolder text-gray-700 fs-6">{{ __('Indirect Refferer Code (Username)') }}</label>
                     <input class="form-control form-control-lg form-control-solid" required type="text"
                         name="indirect_user_id" autocomplete="off" value="" />
                 </div>

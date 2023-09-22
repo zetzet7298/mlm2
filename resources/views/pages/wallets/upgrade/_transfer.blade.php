@@ -31,11 +31,11 @@
                     <div class="d-flex flex-column mb-7 fv-row fv-plugins-icon-container">
                         <!--begin::Label-->
                         <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-                            <span class="required">Receiver Email</span>
-                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="" data-bs-original-title="Email is obtained from personal information" aria-label="Code is obtained from personal information"></i>
+                            <span class="required">Receiver Username</span>
+                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="" data-bs-original-title="Username is obtained from personal information" aria-label="Username is obtained from personal information"></i>
                         </label>
                         <!--end::Label-->
-                        <input type="text" required class="form-control form-control-solid" placeholder="" name="email" value="">
+                        <input type="text" required class="form-control form-control-solid" placeholder="" name="username" value="">
                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                     <!--end::Input group-->
                     <!--begin::Input group-->

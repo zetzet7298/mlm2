@@ -24,11 +24,12 @@ class UsersSeeder extends Seeder
     {
         $demoUser = User::create([
             'id' => Str::uuid()->toString(),
-            'first_name'        => $faker->firstName,
-            'last_name'         => $faker->lastName,
+            'username'        => 'admin',
+            'first_name'        => 'Administrator',
+            'last_name'         => '',
             'email'             => 'admin@admin.com',
             'password'          => Hash::make('admin'),
-            'password2'          => Hash::make('admin2'),
+            // 'password2'          => Hash::make('admin2'),
             'coin' => 1000000,
             'type' => AccountConstant::TYPE_USER_MEMBER,
             'state' => AccountConstant::USER_STATE_PAID,
@@ -38,6 +39,7 @@ class UsersSeeder extends Seeder
 
         $user1 = User::create([
             'id' => Str::uuid()->toString(),
+'username'        => $faker->username,
             'first_name'        => $faker->firstName,
             'last_name'         => $faker->lastName,
             'email'             => $faker->unique()->safeEmail,
@@ -64,6 +66,7 @@ class UsersSeeder extends Seeder
 
         $user2 = User::create([
             'id' => Str::uuid()->toString(),
+'username'        => $faker->username,
             'first_name'        => $faker->firstName,
             'last_name'         => $faker->lastName,
             'email'             => $faker->unique()->safeEmail,
@@ -88,6 +91,7 @@ class UsersSeeder extends Seeder
 
         $user3 = User::create([
             'id' => Str::uuid()->toString(),
+'username'        => $faker->username,
             'first_name'        => $faker->firstName,
             'last_name'         => $faker->lastName,
             'email'             => $faker->unique()->safeEmail,
@@ -112,6 +116,7 @@ class UsersSeeder extends Seeder
 
         $user4 = User::create([
             'id' => Str::uuid()->toString(),
+'username'        => $faker->username,
             'first_name'        => $faker->firstName,
             'last_name'         => $faker->lastName,
             'email'             => $faker->unique()->safeEmail,
@@ -136,6 +141,7 @@ class UsersSeeder extends Seeder
 
         $user5 = User::create([
             'id' => Str::uuid()->toString(),
+'username'        => $faker->username,
             'first_name'        => $faker->firstName,
             'last_name'         => $faker->lastName,
             'email'             => $faker->unique()->safeEmail,
@@ -160,6 +166,7 @@ class UsersSeeder extends Seeder
 
         $user6 = User::create([
             'id' => Str::uuid()->toString(),
+'username'        => $faker->username,
             'first_name'        => $faker->firstName,
             'last_name'         => $faker->lastName,
             'email'             => $faker->unique()->safeEmail,
@@ -174,6 +181,7 @@ class UsersSeeder extends Seeder
 
         $user20 = User::create([
             'id' => Str::uuid()->toString(),
+'username'        => $faker->username,
             'first_name'        => $faker->firstName,
             'last_name'         => $faker->lastName,
             'email'             => $faker->unique()->safeEmail,
@@ -187,6 +195,7 @@ class UsersSeeder extends Seeder
         ]);
         $user21 = User::create([
             'id' => Str::uuid()->toString(),
+'username'        => $faker->username,
             'first_name'        => $faker->firstName,
             'last_name'         => $faker->lastName,
             'email'             => $faker->unique()->safeEmail,
@@ -200,6 +209,7 @@ class UsersSeeder extends Seeder
         ]);
         $user22 = User::create([
             'id' => Str::uuid()->toString(),
+'username'        => $faker->username,
             'first_name'        => $faker->firstName,
             'last_name'         => $faker->lastName,
             'email'             => $faker->unique()->safeEmail,
@@ -213,6 +223,7 @@ class UsersSeeder extends Seeder
         ]);
         $user23 = User::create([
             'id' => Str::uuid()->toString(),
+'username'        => $faker->username,
             'first_name'        => $faker->firstName,
             'last_name'         => $faker->lastName,
             'email'             => $faker->unique()->safeEmail,
@@ -227,6 +238,7 @@ class UsersSeeder extends Seeder
 
         $user24 = User::create([
             'id' => Str::uuid()->toString(),
+'username'        => $faker->username,
             'first_name'        => $faker->firstName,
             'last_name'         => $faker->lastName,
             'email'             => $faker->unique()->safeEmail,
@@ -241,6 +253,7 @@ class UsersSeeder extends Seeder
 
         $user25 = User::create([
             'id' => Str::uuid()->toString(),
+'username'        => $faker->username,
             'first_name'        => $faker->firstName,
             'last_name'         => $faker->lastName,
             'email'             => $faker->unique()->safeEmail,
@@ -254,6 +267,7 @@ class UsersSeeder extends Seeder
         ]);
         $user26 = User::create([
             'id' => Str::uuid()->toString(),
+'username'        => $faker->username,
             'first_name'        => $faker->firstName,
             'last_name'         => $faker->lastName,
             'email'             => $faker->unique()->safeEmail,
@@ -267,6 +281,7 @@ class UsersSeeder extends Seeder
         ]);
         $user27 = User::create([
             'id' => Str::uuid()->toString(),
+'username'        => $faker->username,
             'first_name'        => $faker->firstName,
             'last_name'         => $faker->lastName,
             'email'             => $faker->unique()->safeEmail,
@@ -280,6 +295,7 @@ class UsersSeeder extends Seeder
         ]);
         $user28 = User::create([
             'id' => Str::uuid()->toString(),
+'username'        => $faker->username,
             'first_name'        => $faker->firstName,
             'last_name'         => $faker->lastName,
             'email'             => $faker->unique()->safeEmail,
@@ -293,6 +309,7 @@ class UsersSeeder extends Seeder
         ]);
         $user29 = User::create([
             'id' => Str::uuid()->toString(),
+'username'        => $faker->username,
             'first_name'        => $faker->firstName,
             'last_name'         => $faker->lastName,
             'email'             => $faker->unique()->safeEmail,
@@ -306,6 +323,7 @@ class UsersSeeder extends Seeder
         ]);
         $user30 = User::create([
             'id' => Str::uuid()->toString(),
+'username'        => $faker->username,
             'first_name'        => $faker->firstName,
             'last_name'         => $faker->lastName,
             'email'             => $faker->unique()->safeEmail,
@@ -319,6 +337,7 @@ class UsersSeeder extends Seeder
         ]);
         $user31 = User::create([
             'id' => Str::uuid()->toString(),
+'username'        => $faker->username,
             'first_name'        => $faker->firstName,
             'last_name'         => $faker->lastName,
             'email'             => $faker->unique()->safeEmail,
@@ -333,6 +352,7 @@ class UsersSeeder extends Seeder
         
         $user7 = User::create([
             'id' => Str::uuid()->toString(),
+'username'        => $faker->username,
             'first_name'        => $faker->firstName,
             'last_name'         => $faker->lastName,
             'email'             => $faker->unique()->safeEmail,
@@ -347,6 +367,7 @@ class UsersSeeder extends Seeder
 
         $user8= User::create([
             'id' => Str::uuid()->toString(),
+'username'        => $faker->username,
             'first_name'        => $faker->firstName,
             'last_name'         => $faker->lastName,
             'email'             => $faker->unique()->safeEmail,
@@ -361,6 +382,7 @@ class UsersSeeder extends Seeder
 
         $user9= User::create([
             'id' => Str::uuid()->toString(),
+'username'        => $faker->username,
             'first_name'        => $faker->firstName,
             'last_name'         => $faker->lastName,
             'email'             => $faker->unique()->safeEmail,
@@ -375,6 +397,7 @@ class UsersSeeder extends Seeder
 
         $user10= User::create([
             'id' => Str::uuid()->toString(),
+'username'        => $faker->username,
             'first_name'        => $faker->firstName,
             'last_name'         => $faker->lastName,
             'email'             => $faker->unique()->safeEmail,
@@ -403,6 +426,7 @@ class UsersSeeder extends Seeder
 
         $user11= User::create([
             'id' => Str::uuid()->toString(),
+'username'        => $faker->username,
             'first_name'        => $faker->firstName,
             'last_name'         => $faker->lastName,
             'email'             => $faker->unique()->safeEmail,
@@ -417,6 +441,7 @@ class UsersSeeder extends Seeder
 
         $user12= User::create([
             'id' => Str::uuid()->toString(),
+'username'        => $faker->username,
             'first_name'        => $faker->firstName,
             'last_name'         => $faker->lastName,
             'email'             => $faker->unique()->safeEmail,
@@ -431,6 +456,7 @@ class UsersSeeder extends Seeder
 
         $user13= User::create([
             'id' => Str::uuid()->toString(),
+'username'        => $faker->username,
             'first_name'        => $faker->firstName,
             'last_name'         => $faker->lastName,
             'email'             => $faker->unique()->safeEmail,
@@ -445,6 +471,7 @@ class UsersSeeder extends Seeder
 
         $user14= User::create([
             'id' => Str::uuid()->toString(),
+'username'        => $faker->username,
             'first_name'        => $faker->firstName,
             'last_name'         => $faker->lastName,
             'email'             => $faker->unique()->safeEmail,
@@ -459,6 +486,7 @@ class UsersSeeder extends Seeder
 
         $user15= User::create([
             'id' => Str::uuid()->toString(),
+'username'        => $faker->username,
             'first_name'        => $faker->firstName,
             'last_name'         => $faker->lastName,
             'email'             => $faker->unique()->safeEmail,
@@ -472,6 +500,7 @@ class UsersSeeder extends Seeder
         ]);
         $user16= User::create([
             'id' => Str::uuid()->toString(),
+'username'        => $faker->username,
             'first_name'        => $faker->firstName,
             'last_name'         => $faker->lastName,
             'email'             => $faker->unique()->safeEmail,
@@ -486,6 +515,7 @@ class UsersSeeder extends Seeder
 
         $user17= User::create([
             'id' => Str::uuid()->toString(),
+'username'        => $faker->username,
             'first_name'        => $faker->firstName,
             'last_name'         => $faker->lastName,
             'email'             => $faker->unique()->safeEmail,
@@ -500,6 +530,7 @@ class UsersSeeder extends Seeder
 
         $user17= User::create([
             'id' => Str::uuid()->toString(),
+'username'        => $faker->username,
             'first_name'        => $faker->firstName,
             'last_name'         => $faker->lastName,
             'email'             => $faker->unique()->safeEmail,

@@ -31,10 +31,9 @@ class SystemTreeController extends Controller
                 # code...
                 $full_name = $item['first_name'] .' '. $item['last_name'];
                 array_push($new_data, "<li><a class='view_detail cursor-pointer' data-id='{$item['id']}' data-full_name='{$full_name}' data-level='{$item['level']}'>
-                <div class='symbol symbol-30px'>
+                <div class='symbol symbol-50px symbol-sm-30px'>
 																		<img src='{$avatar}' alt=''>
 																	</div>
-                {$full_name}
                 </a>");
                 $this->generate_system_tree($tree_data, $new_data, $item['id'], $level + 1);
                 array_push($new_data, '</li>');
@@ -44,7 +43,7 @@ class SystemTreeController extends Controller
     }
     public function index(SystemLogsDataTable $dataTable)
     {
-        $users = User::all()->toArray();
+        $users = User::where('indirect_user_id', '<>', null)->orWhere(['username'=>'admin'])->get()->toArray();
         $tree = [];
         $this->generate_system_tree($users, $tree, null, 0);
         $tree = implode('', $tree);

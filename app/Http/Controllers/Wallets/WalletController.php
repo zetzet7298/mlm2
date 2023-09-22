@@ -34,7 +34,7 @@ class WalletController extends Controller
     }
 
     public function create(Request $request){
-        if(empty(User::where(['email' => $request->email])->first()) || $request->email == auth()->user()->email){
+        if(empty(User::where(['username' => $request->username])->first()) || $request->username == auth()->user()->username){
             return redirect()->back()->with("error", "Receiver Not Exists!");
         }
         if($request->coin > auth()->user()->coin){
@@ -45,13 +45,13 @@ class WalletController extends Controller
         }
         DB::beginTransaction();
         try {     
-            $receiver = User::where(['email' => $request->email])->first();
+            $receiver = User::where(['username' => $request->username])->first();
             $new_coin = auth()->user()->coin - floatval($request->coin);
             $receiver_new_coin = $receiver->coin + floatval($request->coin);
             auth()->user()->update([
                 'coin' =>  $new_coin,
             ]);
-            User::where(['email' => $request->email])->update([
+            User::where(['username' => $request->username])->update([
                 'coin' =>  $receiver_new_coin,
             ]);
             Transfer::create([
@@ -78,15 +78,17 @@ class WalletController extends Controller
             return redirect()->back()->with("error", "Already Member!");
         }
         // dd(User::where(['id' => $request->direct_user_id])->first());
-        if(empty(User::where(['id' => $request->direct_user_id])->first()) || $request->direct_user_id == auth()->user()->id){
+        $direct_user = User::where(['username' => $request->direct_user_id])->first();
+        $indirect_user = User::where(['username' => $request->indirect_user_id])->first();
+        if(empty($direct_user) || $request->direct_user_id == auth()->user()->username){
             return redirect()->back()->with("error", "Direct User Code Not Exists!");
         }else{
-            $count = User::where(['direct_user_id' => $request->direct_user_id])->count();
+            $count = User::where(['direct_user_id' => $direct_user->id])->count();
             if($count >= 2){
                 return redirect()->back()->with("error", "This code has exhausted all entries!");
             }
         }
-        if(empty(User::where(['id' => $request->indirect_user_id])->first()) || $request->indirect_user_id == auth()->user()->id){
+        if(empty($indirect_user) || $request->indirect_user_id == auth()->user()->username){
             return redirect()->back()->with("error", "Indirect User Code Not Exists!");
         }
         DB::beginTransaction();
@@ -106,8 +108,8 @@ class WalletController extends Controller
                 auth()->user()->update([
                     'coin' =>  $new_coin,
                     'type' => AccountConstant::TYPE_USER_MEMBER,
-                    'direct_user_id' => $request->direct_user_id,
-                    'indirect_user_id' => $request->indirect_user_id,
+                    'direct_user_id' => $direct_user->id,
+                    'indirect_user_id' => $indirect_user->id,
                     'state'             => AccountConstant::USER_STATE_PAID
                 ]);
             }else{
@@ -119,8 +121,8 @@ class WalletController extends Controller
                     'content'             => 'Send Request To Upgrade account',
                 ]);
                 auth()->user()->update([
-                    'direct_user_id' => $request->direct_user_id,
-                    'indirect_user_id' => $request->indirect_user_id,
+                    'direct_user_id' => $direct_user->id,
+                    'indirect_user_id' => $indirect_user->id,
                     'state'             => AccountConstant::USER_STATE_PROCESSING
                 ]);
             }
