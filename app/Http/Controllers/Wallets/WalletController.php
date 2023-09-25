@@ -8,9 +8,11 @@ use App\DataTables\Wallets\IncomeDataTable;
 use App\DataTables\Wallets\TransferDataTable;
 use App\DataTables\Wallets\WithdrawalDataTable;
 use App\Http\Controllers\Controller;
+use App\Models\Income;
 use App\Models\Transfer;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Action;
 use Illuminate\Support\Facades\DB;
 use Jackiedo\LogReader\LogReader;
 use Illuminate\Support\Facades\Hash;
@@ -71,6 +73,15 @@ class WalletController extends Controller
         }
     }
 
+    function handle_income($user_id, $coin, $content){
+        $direct_coin = AccountConstant::DIRECT_COMISSION;
+        Income::create([
+            'user_id' => $user_id,
+            'coin' => $direct_coin,
+            'content' => $content
+        ]);
+    }
+
     public function upgrade(Request $request)
     {
         if(auth()->user()->type != AccountConstant::TYPE_USER_FREE)
@@ -83,9 +94,9 @@ class WalletController extends Controller
         if(empty($direct_user) || $request->direct_user_id == auth()->user()->username){
             return redirect()->back()->with("error", "Direct User Code Not Exists!");
         }else{
-            $count = User::where(['direct_user_id' => $direct_user->id])->count();
+            $count = User::where(['indirect_user_id' => $indirect_user->id])->count();
             if($count >= 2){
-                return redirect()->back()->with("error", "This code has exhausted all entries!");
+                return redirect()->back()->with("error", "This indirect code has exhausted all entries!");
             }
         }
         if(empty($indirect_user) || $request->indirect_user_id == auth()->user()->username){
@@ -112,6 +123,7 @@ class WalletController extends Controller
                     'indirect_user_id' => $indirect_user->id,
                     'state'             => AccountConstant::USER_STATE_PAID
                 ]);
+                User::handleUpgrade($direct_user->id);
             }else{
                 $admin = User::getAdmin();
                 Transfer::create([
@@ -126,10 +138,91 @@ class WalletController extends Controller
                     'state'             => AccountConstant::USER_STATE_PROCESSING
                 ]);
             }
+
+            // $users = User::where('indirect_user_id', '<>', null)
+            // ->orWhere(['username' => 'admin'])
+            // ->orderBy('level')
+            // ->orderBy('created_at')
+            // ->get()->toArray();
+
+            // $n = count($users);
+            // $root = null;
+            // $root = User::insertLevelOrder($users, 0, $n);
+            // $level = User::getLevel($root, $users[6]);
+            // $totalLeft = User::getTotalLeft($root);
+            // // dd($totalLeft);
+            // $totalRight = User::getTotalRight($root);
+            // $totalNode = $totalLeft + $totalRight;
+            // // dd($totalRight);
+
+            // foreach($users as $user){
+            //     $gold_commission = 0;
+            //     $total_coin = 0;
+            //     $new_type = User::getAccountType(auth()->user()->type, $totalLeft, $totalRight);
+            //     User::where(['id' => $user['id']])->update(['type' => $new_type]);
+            //     // switch($user['type']){
+            //     switch($new_type){
+            //         case AccountConstant::TYPE_USER_SAPHIRE:
+            //             $count_user_saphire = User::where(['type' => AccountConstant::TYPE_USER_SAPHIRE])->count();
+            //             if ($count_user_saphire > 0){
+            //                 $gold_commission = (AccountConstant::DIRECT_COMISSION * (3/100))/$count_user_saphire;
+            //             }
+            //             break;
+            //         case AccountConstant::TYPE_USER_RUBY:
+            //             $count_user_ruby = User::where(['type' => AccountConstant::TYPE_USER_SAPHIRE])->count();
+            //             if ($count_user_ruby > 0){
+            //                 $gold_commission = (AccountConstant::DIRECT_COMISSION * (5/100))/$count_user_ruby;
+            //             }
+            //             break;
+            //         case AccountConstant::TYPE_USER_DIAMOND:
+            //             $count_user_diamond = User::where(['type' => AccountConstant::TYPE_USER_SAPHIRE])->count();
+            //             if ($count_user_diamond > 0){
+            //                 $gold_commission= (AccountConstant::DIRECT_COMISSION * (7/100))/$count_user_diamond;
+            //             }
+            //             break;
+            //     }
+
+            //     if($gold_commission > 0 || $user['id'] == $direct_user->id || $totalNode > 0){
+            //         $total_coin = $user['coin'];
+            //         $content = '';
+            //         if($user['id'] == $direct_user->id){
+            //             $total_coin += AccountConstant::DIRECT_COMISSION;
+            //             $content = 'direct commission';
+            //             Income::create([
+            //                 'user_id'        => $user->id,
+            //                 'coin'             => AccountConstant::DIRECT_COMISSION,
+            //                 'content'             => $content,
+            //             ]);
+            //         }
+            //         if($gold_commission > 0){
+            //             $total_coin += $gold_commission;
+            //             $content = "{$new_type} commission";
+            //             Income::create([
+            //                 'user_id'        => $user->id,
+            //                 'coin'             => $gold_commission,
+            //                 'content'             => $content,
+            //             ]);
+            //         }
+            //         User::where(['id' => $user['id']])->update([
+            //             'coin' => $total_coin
+            //         ]);
+            //         if($totalNode > 0){
+            //             $coin = $totalNode * AccountConstant::INDIRECT_COMISSION;
+            //             $total_coin += $gold_commission;
+            //             $content = "{$new_type} commission";
+            //             Income::create([
+            //                 'user_id'        => $user->id,
+            //                 'coin'             => $coin,
+            //                 'content'             => $content,
+            //             ]);
+            //         }
+            //     }
+            // }
             DB::commit();
             return redirect()->back()->with("success", "Success!");
             // all good
         } catch (\Exception $e) {
+            dd($e);
             report($e);
             DB::rollback();
             return redirect()->back()->with("error", "Failed");

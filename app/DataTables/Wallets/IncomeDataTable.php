@@ -77,11 +77,10 @@ class IncomeDataTable extends DataTable
             //       ->printable(false)
             //       ->width(60)
             //       ->addClass('text-center'),
-            Column::make('id'),
+            Column::make('created_at')->title((__('Date'))),
             Column::make('coin'),
-            Column::make('content'),
+            Column::make('content')->title((__('Bonus information'))),
             // Column::make('user_id')->title(__('User')),
-            Column::make('created_at'),
             // Column::make('updated_at'),
         ];
     }

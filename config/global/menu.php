@@ -422,7 +422,7 @@ return array(
                 'class' => 'menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px',
                 'items' => array(
                     array(
-                        'title'  => 'Wallet Detail',
+                        'title'  => 'Upgrade',
                         'path'   => 'wallet/upgrade',
                         'bullet' => '<span class="bullet bullet-dot"></span>',
                     ),
@@ -432,7 +432,7 @@ return array(
                         'bullet' => '<span class="bullet bullet-dot"></span>',
                     ),
                     array(
-                        'title'      => 'Transfer History',
+                        'title'      => 'Transfer',
                         'path'       => 'wallet/transfer-history',
                         'bullet'     => '<span class="bullet bullet-dot"></span>',
                     ),

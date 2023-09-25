@@ -74,11 +74,11 @@ class WithdrawalDataTable extends DataTable
             //       ->printable(false)
             //       ->width(60)
             //       ->addClass('text-center'),
-            Column::make('id'),
+            // Column::make('id'),
+            Column::make('created_at')->title(__('Date')),
             Column::make('coin'),
-            Column::make('content'),
+            Column::make('content')->title(__('Content')),
             // Column::make('user_id')->title(__('User')),
-            Column::make('created_at'),
             // Column::make('updated_at'),
         ];
     }

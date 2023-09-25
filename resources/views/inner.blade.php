@@ -1,5 +1,37 @@
-<x-base-layout>
-
-    {{ request()->url() }}
-
-</x-base-layout>
+<ul>
+    <li>
+        <a>Administrator</a>
+        <ul>
+            <li>
+                <a>3</a>
+                <ul>
+                    <li>
+                        <a>6</a>
+                        <ul>
+                            <li><a>8</a></li>
+                            <li><a>9</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a>7</a>
+                        <ul>
+                            <li><a>10</a></li>
+                            <li><a>11</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li><a>5</a>
+                <ul>
+                    <li><a>4</a>
+                        <ul>
+                            <li><a>13</a></li>
+                            <li><a>12</a></li>
+                        </ul>
+                    </li>
+                    <li><a>2</a></li>
+                </ul>
+            </li>
+        </ul>
+    </li> 
+</ul>

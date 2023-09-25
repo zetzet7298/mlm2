@@ -52,11 +52,11 @@ class RegisteredUserController extends Controller
             'email'      => $request->email,
             'password'   => Hash::make($request->password),
             // 'password2'   => Hash::make($request->password2),
-            // 'indirect_user_id'      => $request->indirect_user_id,
+            'direct_user_id'      => $request->direct_user_id,
         ];
-        $count = User::where(['direct_user_id' => $request->direct_user_id])->count();
+        $count = User::where(['indirect_user_id' => $request->indirect_user_id])->count();
         if($count < 2){
-            $data['direct_user_id'] = $request->direct_user_id;
+            $data['indirect_user_id'] = $request->indirect_user_id;
         }
         $user = User::create($data);
 

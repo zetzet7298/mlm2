@@ -11,7 +11,7 @@
       <!--begin::Modal header-->
       <div class="modal-header" id="kt_modal_add_customer_header">
         <!--begin::Modal title-->
-        <h2 class="fw-bolder">Chi tiết user</h2>
+        <h2 class="fw-bolder">User Detail</h2>
         <!--end::Modal title-->
         <!--begin::Close-->
         <div
@@ -58,11 +58,11 @@
         <!--begin::Row-->
         <div class="row mb-7">
           <!--begin::Label-->
-          <label class="col-lg-5 fw-bold text-muted">Full name</label>
+          <label class="col-lg-5 fw-bold text-muted">Username</label>
           <!--end::Label-->
           <!--begin::Col-->
           <div class="col-lg-7">
-            <span class="fw-bolder fs-6 text-gray-800 me-5" id="full_name"></span><span class="fs-6 badge badge-success" id="type"></span>
+            <span class="fw-bolder fs-6 text-gray-800 me-5" id="username"></span><span class="fs-6 badge badge-success" id="type"></span>
           </div>
           <!--end::Col-->
         </div>
@@ -78,7 +78,7 @@
           </div>
           <!--end::Col-->
         </div>
-        <!--end::Row-->
+        {{-- <!--end::Row-->
          <!--begin::Row-->
          <div class="row mb-7">
           <!--begin::Label-->
@@ -151,7 +151,7 @@
           </div>
           <!--end::Col-->
         </div>
-        <!--end::Row-->
+        <!--end::Row--> --}}
         <!--begin::Row-->
         <div class="row mb-7">
           <!--begin::Label-->

@@ -16,6 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->uuid('id');
             $table->primary('id');
+            // $table->smallInteger('level');
             $table->string('first_name');
             $table->string('last_name');
             $table->string('username')->unique();
@@ -29,6 +30,7 @@ class CreateUsersTable extends Migration
             $table->uuid('sponsor_id')->nullable();
             $table->string('type', 30)->default('free');
             $table->double('coin')->default(0);
+            $table->double('commissions')->default(0);
             $table->tinyInteger('state')->default(0);
             $table->uuid('direct_user_id')->nullable();
             $table->uuid('indirect_user_id')->nullable();

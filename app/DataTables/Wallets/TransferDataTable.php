@@ -87,13 +87,12 @@ class TransferDataTable extends DataTable
             //       ->printable(false)
             //       ->width(60)
             //       ->addClass('text-center'),
-            Column::make('id'),
+            Column::make('created_at')->title(__('Date')),
             Column::make('sender_id')->title(__('Sender')),
             Column::make('receiver_id')->title(__('Receiver')),
             Column::make('coin'),
-            Column::make('content'),
-            Column::make('state'),
-            Column::make('created_at'),
+            Column::make('content')->title((__('Transfer Content'))),
+            // Column::make('state'),
             // Column::make('updated_at'),
         ];
     }

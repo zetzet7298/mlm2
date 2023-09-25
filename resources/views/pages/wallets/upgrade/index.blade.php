@@ -3,7 +3,7 @@
     <!--begin::Card-->
     <div class="card">
         <div class="card-title m-0">
-            <h3 class="fw-bolder px-10 pt-10">Wallet Detail</h3>
+            <h3 class="fw-bolder px-10 pt-10">Upgrade</h3>
         </div>
         <!--begin::Card body-->
         <div class="card-body p-10">
@@ -25,9 +25,6 @@
                 <!--end::Select-->
             </div>
             @if(auth()->user()->type != AccountConstant::TYPE_USER_FREE)
-            <a href="#" class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal"
-                data-bs-target="#kt_modal_transfer">Transfer To Someone</a>
-            @include('pages.wallets.upgrade._transfer')
             @elseif(auth()->user()->state == AccountConstant::USER_STATE_PROCESSING)
             <div class="fs-5 badge badge-light-success mb-4">
                 Your account is waiting for confirmation to become a member
@@ -47,9 +44,9 @@
                 <!--begin::Input group-->
                 <div class="fv-row mb-7">
                     <label class="form-label fw-bolder text-gray-700 fs-6">{{ __('Direct Refferer Code (Username)') }}</label>
-                    @if(!empty(auth()->user()->direct_user_id))
+                    @if(!empty(auth()->user()->direct_user))
                     <input class="form-control form-control-lg form-control-solid" required type="text" readonly
-                        name="direct_user_id" autocomplete="off" value="{{ auth()->user()->direct_user_id }}" />
+                        name="direct_user_id" autocomplete="off" value="{{ auth()->user()->direct_user->username }}" />
                     @else
                     <input class="form-control form-control-lg form-control-solid" required type="text"
                         name="direct_user_id" autocomplete="off" value="" />

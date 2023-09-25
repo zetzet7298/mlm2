@@ -52,7 +52,7 @@ class UserDataTable extends DataTable
     public function query(User $model)
     {
         return $model->with(['direct_user', 'indirect_user'])->where(['type' => AccountConstant::TYPE_USER_FREE])
-        ->orderBy('updated_at', 'desc')
+        ->orderBy('created_at', 'desc')
         ->orderBy('state', 'desc')
         ->newQuery();
     }

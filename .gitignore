@@ -8,7 +8,7 @@
 /public/plugins
 
 /public/demo1
-/public/demo2
+# /public/demo2
 /public/demo3
 /public/demo4
 /public/demo5
