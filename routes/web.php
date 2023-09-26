@@ -75,7 +75,7 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::prefix('wallet')->name('wallet.')->group(function () {
-        Route::get('upgrade', [WalletController::class, 'indexUpgrade']);
+        Route::get('upgrade', [WalletController::class, 'indexUpgrade'])->name('upgrade.index');
         Route::post('upgrade', [WalletController::class, 'upgrade'])->name('upgrade');
         Route::get('income-history', [WalletController::class, 'indexIncomeHistory']);
         Route::get('transfer-history', [WalletController::class, 'indexTransferHistory']);

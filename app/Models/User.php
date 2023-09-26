@@ -10,14 +10,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable 
+class User extends Authenticatable
 // implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
     use SpatieLogsActivity;
     use HasRoles;
     protected $primaryKey = 'id';
-    public $incrementing = false; 
+    public $incrementing = false;
     public $keyType = 'string';
 
     /**
@@ -68,11 +68,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public static function getAdmin() {
+    public static function getAdmin()
+    {
         return self::where(['email' => 'admin@admin.com'])->first();
     }
 
-    public static function isAdmin() {
+    public static function isAdmin()
+    {
         return auth()->user()->email == 'admin@admin.com';
     }
     /**
@@ -91,17 +93,15 @@ class User extends Authenticatable
      */
     public static function getAccountType($type, $total_left = 0, $total_right = 0)
     {
-        if($type == AccountConstant::TYPE_USER_MEMBER && $total_left >=155 && $total_right >= 155){
+        if ($type == AccountConstant::TYPE_USER_MEMBER && $total_left >= 155 && $total_right >= 155) {
             return AccountConstant::TYPE_USER_DIAMOND;
-        }
-        elseif($type == AccountConstant::TYPE_USER_MEMBER && $total_left >=55 && $total_right >= 55){
+        } elseif ($type == AccountConstant::TYPE_USER_MEMBER && $total_left >= 55 && $total_right >= 55) {
             return AccountConstant::TYPE_USER_RUBY;
-        }elseif($type == AccountConstant::TYPE_USER_MEMBER && $total_left >=55 && $total_right >= 55){
+        } elseif ($type == AccountConstant::TYPE_USER_MEMBER && $total_left >= 5 && $total_right >= 5) {
             return AccountConstant::TYPE_USER_SAPHIRE;
-        }
-        else{
+        } else {
             return $type;
-        } 
+        }
     }
 
     /**
@@ -115,7 +115,7 @@ class User extends Authenticatable
             return asset($this->avatar);
         }
 
-        return asset(theme()->getMediaUrlPath().'avatars/blank.png');
+        return asset(theme()->getMediaUrlPath() . 'avatars/blank.png');
     }
 
     /**
@@ -136,6 +136,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(self::class, 'indirect_user_id', 'id')->with('allChildren');
     }
+
+
+
     public function parents()
     {
         return $this->parent()->with('parents');
@@ -143,8 +146,8 @@ class User extends Authenticatable
     public function children()
     {
         return $this->hasMany(self::class, 'indirect_user_id', 'id')->where('direct_user_id', '<>', null)->where('indirect_user_id', '<>', null)->orderBy('created_at')
-        // ;
-        ->where('state' , AccountConstant::USER_STATE_PAID);
+            ;
+            // ->where('state', AccountConstant::USER_STATE_PAID);
     }
     public function allChildren()
     {
@@ -173,9 +176,9 @@ class User extends Authenticatable
     //             $full_name = $item['first_name'] . ' ' . $item['last_name'];
     //             array_push($new_data, "<li><a class='view_detail cursor-pointer' data-id='{$item['id']}' data-full_name='{$full_name}' data-level='{$item['level']}'>
     //             <div class='symbol symbol-50px symbol-sm-30px'>
-	// 																	<img src='{$avatar}' alt=''>
+    // 																	<img src='{$avatar}' alt=''>
     //                                                                     {$full_name}
-	// 																</div>
+    // 																</div>
     //             </a>");
     //             self::generate_system_tree($tree_data, $new_data, $item['id'], $level + 1);
     //             array_push($new_data, '</li>');
@@ -196,7 +199,7 @@ class User extends Authenticatable
                                                             </div>
         </a>");
         $children = $parent->allChildren;
-        
+
         if ($children) {
             // array_push($new_data, '<ul>');
             array_push($new_data, '<ul>');
@@ -210,17 +213,18 @@ class User extends Authenticatable
         array_push($new_data, '</li>');
     }
 
-    public static function insert($arr, $parent_id){
+    public static function insert($arr, $parent_id)
+    {
         $node = null;
-        if ($arr){
+        if ($arr) {
             // $node = new newNode($k);
             // dump(new newNode($arr[0]));
 
             // return new newNode($arr[0]);
             // dd($arr);
             // if(!empty($arr)){
-            foreach($arr as $i => $item){
-                if($item['direct_user_id'] == $parent_id){
+            foreach ($arr as $i => $item) {
+                if ($item['direct_user_id'] == $parent_id) {
                     $node = new newNode($item);
                     // dump($node->left);
                     // $node->left = self::insert($node->left, $arr, $item['id']);
@@ -236,26 +240,25 @@ class User extends Authenticatable
         }
         // dump($node);
         return $node;
-        
     }
-    public static function insert_node($node, $key){
-        if(empty($node)){
+    public static function insert_node($node, $key)
+    {
+        if (empty($node)) {
             return new newNode($key);
         }
         // dd($node);
-     
+
         # Otherwise, recur down the tree
-        if ($key['indirect_user_id'] == $node->data['id']){
+        if ($key['indirect_user_id'] == $node->data['id']) {
             $node->left = self::insert_node($node->left, $key);
-        }
-        elseif($key['indirect_user_id'] != $node->data['id']){
+        } elseif ($key['indirect_user_id'] != $node->data['id']) {
             $node->right = self::insert_node($node->right, $key);
         }
         return $node;
     }
-   
 
- 
+
+
     # Return the (unchanged) node pointer
     public static function insertLevelOrder($arr, $i, $n, $parent_id = '')
     {
@@ -293,67 +296,70 @@ class User extends Authenticatable
         }
     }
 
-    public function checkHasBranch($node){
-        if(!empty($node->left)){
-            
+    public function checkHasBranch($node)
+    {
+        if (!empty($node->left)) {
         }
     }
-    public static function printPreorder($node, &$html = ''){
-    if (empty($node)) return null;
-    $item = $node->data;
-    $avatar = $item['avatar'] ? asset($item['avatar']) :  asset(theme()->getMediaUrlPath() . 'avatars/blank.png');
-    $full_name = $item['first_name'] . ' ' . $item['last_name'];
-    // $a = "<a class='view_detail cursor-pointer' data-id='{$item['id']}' data-full_name='{$full_name}'>
-    // <div >
-    //                                                         <img style='width:25px;height:25px;' src='{$avatar}' alt=''>
-    //                                                     </div>
-    // </a>";
-    $a = "<a class='view_detail cursor-pointer' data-id='{$item['id']}' data-full_name='{$full_name}'>
+    public static function printPreorder($node, &$html = '')
+    {
+        if (empty($node)) return null;
+        $item = $node->data;
+        $avatar = $item['avatar'] ? asset($item['avatar']) :  asset(theme()->getMediaUrlPath() . 'avatars/blank.png');
+        $full_name = $item['first_name'] . ' ' . $item['last_name'];
+        // $a = "<a class='view_detail cursor-pointer' data-id='{$item['id']}' data-full_name='{$full_name}'>
+        // <div >
+        //                                                         <img style='width:25px;height:25px;' src='{$avatar}' alt=''>
+        //                                                     </div>
+        // </a>";
+        $a = "<a class='view_detail cursor-pointer' data-id='{$item['id']}' data-full_name='{$full_name}'>
     <div >
                                                             {$full_name}
                                                         </div>
     </a>";
-    if(!empty($node->left) || !empty($node->right)){
+        if (!empty($node->left) || !empty($node->right)) {
             // $html .= '<ul>';
             $html .= '<li>';
             $html .= $a;
             $html .= '<ul>';
-        }else{
+        } else {
             $html .= '<li>';
             $html .= $a;
         }
-        
+
         # Recur on left subtree
         self::printPreorder($node->left, $html);
         # Recur on right subtree
         self::printPreorder($node->right, $html);
-        if(!empty($node->left) || !empty($node->right)){
+        if (!empty($node->left) || !empty($node->right)) {
             $html .= '</ul>';
             $html .= '</li>';
-        }else{
+        } else {
             $html .= '</li>';
         }
     }
 
-    public static function search($node, $user_id){
+    public static function search($node, $user_id)
+    {
 
         if (empty($node)) return null;
 
-        if($node->data['id'] == $user_id){
+        if ($node->data['id'] == $user_id) {
             return $node;
         }
         $result_node = self::search($node->left, $user_id);
-        if(!(empty($result_node))){
+        if (!(empty($result_node))) {
             return $result_node;
         }
         # Recur on right subtree
         $result_node = self::search($node->right, $user_id);
-        if(!(empty($result_node))){
+        if (!(empty($result_node))) {
             return $result_node;
         }
     }
 
-    public static function getTotal($parent, &$total=0){
+    public static function getTotal($parent, &$total = 0)
+    {
         $children = $parent->allChildren;
         $total += 1;
         if ($children) {
@@ -374,19 +380,19 @@ class User extends Authenticatable
     //     if (empty($node->left)) return 0;
     //     return self::getTotal($node->left);
     // }
-    public static function calc_total($parent){
+    public static function calc_total($parent)
+    {
         $total = 0;
         $totalLeft = 0;
         $totalRight = 0;
         $children = $parent->allChildren;
-        if(!empty($children)){
-            if(!empty($children[0])){
+        if (!empty($children)) {
+            if (!empty($children[0])) {
                 self::getTotal($children[0], $totalLeft);
             }
-            if(!empty($children[1])){
+            if (!empty($children[1])) {
                 self::getTotal($children[1], $totalRight);
             }
-            
         }
         return [
             'total' => $totalLeft + $totalRight,
@@ -395,121 +401,134 @@ class User extends Authenticatable
         ];
     }
 
-    public static function getTotalRight($node){
+    public static function getTotalRight($node)
+    {
         if (empty($node->right)) return 0;
         return self::getTotal($node->right);
     }
 
-    public static function getLevelUtil($node, $data, $level){
-        if ($node == null){
+    public static function getLevelUtil($node, $data, $level)
+    {
+        if ($node == null) {
             return 0;
-
         }
-        if ($node->data == $data){
+        if ($node->data == $data) {
             return $level;
         }
         $downlevel = self::getLevelUtil($node->left, $data, $level + 1);
-        if ($downlevel != 0){
+        if ($downlevel != 0) {
             return $downlevel;
         }
         $downlevel = self::getLevelUtil($node->right, $data, $level + 1);
         return $downlevel;
     }
- 
- 
-# Returns level of given data value
- 
- 
-    public static function getLevel($node, $data){
+
+
+    # Returns level of given data value
+
+
+    public static function getLevel($node, $data)
+    {
         return self::getLevelUtil($node, $data, 0);
     }
 
-    public static function handleUpgrade($user_id, $direct_user_id){
-        $me = User::where(['id' => $user_id])->with(['parents'])->first();
-
+    public static function handleUpgrade($user_id, $direct_user_id)
+    {
+        $me = User::where(['id' => $user_id])->with(['parents', 'direct_user'])->first();
+        User::where('id', $user_id)->update(['level' => $me->parents->level + 1, 'state' => AccountConstant::USER_STATE_PAID]);
         $user = $me->parents;
-        while(!empty($user)){
-            $gold_commission = 0;
-                $total_coin = 0;
-                $calc_total = self::calc_total($user);
-                $totalLeft = $calc_total['totalLeft'];
-                $totalRight = $calc_total['totalRight'];
-                // $totalNode = $calc_total['total'];
-                $new_type = self::getAccountType(auth()->user()->type, $totalLeft, $totalRight);
-                // self::where(['id' => $user['id']])->update(['type' => $new_type]);
-                // switch($user['type']){
-                switch($new_type){
-                    case AccountConstant::TYPE_USER_SAPHIRE:
-                        $count_user_saphire = self::where(['type' => AccountConstant::TYPE_USER_SAPHIRE])->count();
-                        if ($count_user_saphire > 0){
-                            $gold_commission = (AccountConstant::DIRECT_COMISSION * (3/100))/$count_user_saphire;
-                        }
-                        break;
-                    case AccountConstant::TYPE_USER_RUBY:
-                        $count_user_ruby = self::where(['type' => AccountConstant::TYPE_USER_SAPHIRE])->count();
-                        if ($count_user_ruby > 0){
-                            $gold_commission = (AccountConstant::DIRECT_COMISSION * (5/100))/$count_user_ruby;
-                        }
-                        break;
-                    case AccountConstant::TYPE_USER_DIAMOND:
-                        $count_user_diamond = self::where(['type' => AccountConstant::TYPE_USER_SAPHIRE])->count();
-                        if ($count_user_diamond > 0){
-                            $gold_commission= (AccountConstant::DIRECT_COMISSION * (7/100))/$count_user_diamond;
-                        }
-                        break;
-                }
+        while (!empty($user)) {
+            $total_coin = 0;
+            $calc_total = self::calc_total($user);
+            $totalLeft = $calc_total['totalLeft'];
+            $totalRight = $calc_total['totalRight'];
+            // $totalNode = $calc_total['total'];
+            $new_type = self::getAccountType(auth()->user()->type, $totalLeft, $totalRight);
+            // dump($totalLeft, $totalRight, $new_type);
+            // self::where(['id' => $user['id']])->update(['type' => $new_type]);
+            $content = "branch bonus commissions";
+            Income::create([
+                'user_id'        => $user['id'],
+                'coin'             => AccountConstant::INDIRECT_COMISSION,
+                'content'             => $content,
+            ]);
+            // dd(Income::where('user_id', $user->id)->first());
 
-                if($gold_commission > 0 || $user['id'] == $direct_user_id || $user->level > 0){
-                    $total_coin = 0;
-                    $content = '';
-                    if($user['id'] == $direct_user_id){
-                        $total_coin += AccountConstant::DIRECT_COMISSION;
-                        $content = 'direct commission';
-                        Income::create([
-                            'user_id'        => $user['id'],
-                            'coin'             => AccountConstant::DIRECT_COMISSION,
-                            'content'             => $content,
-                        ]);
-                    }
-                    if($gold_commission > 0){
-                        $total_coin += $gold_commission;
-                        $content = "{$new_type} commission";
-                        Income::create([
-                            'user_id'        => $user['id'],
-                            'coin'             => $gold_commission,
-                            'content'             => $content,
-                        ]);
-                    }
+            self::where(['id' => $user['id']])->update([
+                'type' => $new_type,
+                'coin' => AccountConstant::INDIRECT_COMISSION + $user['coin'],
+                'commissions' => AccountConstant::INDIRECT_COMISSION + $user['commissions'],
+            ]);
+            // dd(User::find($user->id));
 
-                    $coin = $user->level * AccountConstant::INDIRECT_COMISSION;
-                    $total_coin += $coin;
-                    $content = "branch bonus commissions";
-                    Income::create([
-                        'user_id'        => $user['id'],
-                        'coin'             => $coin,
-                        'content'             => $content,
-                    ]);
-
-                    self::where(['id' => $user['id']])->update([
-                        'coin' => $total_coin + $user['coin'],
-                        'commissions' => $total_coin,
-                    ]);
-                }
             $user = $user->parents;
         }
-        User::where('id', $user_id)->update(['level' => $me->parents->level + 1]);
+        $old_direct_user = User::find($me->direct_user_id);
+        User::where('id', $direct_user_id)->update([
+            'coin' => AccountConstant::DIRECT_COMISSION + $old_direct_user['coin'],
+            'commissions' => AccountConstant::DIRECT_COMISSION + $old_direct_user['commissions'],
+        ]);
 
+        $content = 'direct commission';
+        Income::create([
+            'user_id'        => $me->direct_user['id'],
+            'coin'             => AccountConstant::DIRECT_COMISSION,
+            'content'             => $content,
+        ]);
+
+        $gold_users = User::where('type', AccountConstant::TYPE_USER_RUBY)
+            ->orWhere('type', AccountConstant::TYPE_USER_SAPHIRE)
+            ->orWhere('type', AccountConstant::TYPE_USER_DIAMOND)->get();
+            
+        foreach ($gold_users as $gold_user) {
+            $gold_commission = 0;
+            switch ($gold_user->type) {
+                case AccountConstant::TYPE_USER_SAPHIRE:
+                    $count_user_saphire = self::where(['type' => AccountConstant::TYPE_USER_SAPHIRE])->count();
+                    if ($count_user_saphire > 0) {
+                        $gold_commission = (AccountConstant::DIRECT_COMISSION * (3 / 100)) / $count_user_saphire;
+                    }
+                    break;
+                case AccountConstant::TYPE_USER_RUBY:
+                    $count_user_ruby = self::where(['type' => AccountConstant::TYPE_USER_SAPHIRE])->count();
+                    if ($count_user_ruby > 0) {
+                        $gold_commission = (AccountConstant::DIRECT_COMISSION * (5 / 100)) / $count_user_ruby;
+                    }
+                    break;
+                case AccountConstant::TYPE_USER_DIAMOND:
+                    $count_user_diamond = self::where(['type' => AccountConstant::TYPE_USER_SAPHIRE])->count();
+                    if ($count_user_diamond > 0) {
+                        $gold_commission = (AccountConstant::DIRECT_COMISSION * (7 / 100)) / $count_user_diamond;
+                    }
+                    break;
+            }
+
+            if ($gold_commission > 0) {
+                $content = "{$gold_user->type} commission";
+                Income::create([
+                    'user_id'        => $gold_user['id'],
+                    'coin'             => $gold_commission,
+                    'content'             => $content,
+                ]);
+
+                self::where(['id' => $gold_user['id']])->update([
+                    'coin' => $gold_commission + $gold_user['coin'],
+                    'commissions' => $gold_commission + $gold_user['commissions'],
+                ]);
+            }
+        }
+        // dd(1);
         // $users = self::with(['allChildren'])
         //     ->orderBy('created_at')
         //     ->get()->toArray();
-            // $user_id = auth()->user()->id;
-            // $user = User::with(['allChildren'])
-            // ->where('state' , AccountConstant::USER_STATE_PAID)
-            // ->where('id', $user_id)
-            // ->first();
+        // $user_id = auth()->user()->id;
+        // $user = User::with(['allChildren'])
+        // ->where('state' , AccountConstant::USER_STATE_PAID)
+        // ->where('id', $user_id)
+        // ->first();
 
         //     foreach($users as $user){
-                
+
         // }
     }
     // public static function handleUpgrade($direct_user_id){

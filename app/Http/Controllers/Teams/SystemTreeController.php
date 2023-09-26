@@ -62,7 +62,9 @@ class SystemTreeController extends Controller
         ->where('state' , AccountConstant::USER_STATE_PAID)
         ->where('id', $user_id)
         ->first();
-
+        if(empty($user)){
+            return redirect(route('wallet.upgrade.index'));
+        }
         // $users = User::with('children', 'indirect_user')
         // ->where('direct_user_id', '<>', null)
         // ->where('indirect_user_id', '<>', null)
