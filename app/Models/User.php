@@ -146,8 +146,8 @@ class User extends Authenticatable
     public function children()
     {
         return $this->hasMany(self::class, 'indirect_user_id', 'id')->where('direct_user_id', '<>', null)->where('indirect_user_id', '<>', null)->orderBy('created_at')
-            ;
-            // ->where('state', AccountConstant::USER_STATE_PAID);
+            // ;
+            ->where('state', AccountConstant::USER_STATE_PAID);
     }
     public function allChildren()
     {
