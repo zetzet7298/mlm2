@@ -16,20 +16,20 @@ class UsersController extends Controller
                 'total' => 0,
             ]);
         }
-        $users = User::where('indirect_user_id', '<>', null)
-        ->where('state' , AccountConstant::USER_STATE_PAID)
-            ->orWhere(['username' => 'admin'])
-            // ->orderBy('level')
-            ->orderBy('created_at')
-            ->get()->toArray();
+        // $users = User::where('indirect_user_id', '<>', null)
+        // ->where('state' , AccountConstant::USER_STATE_PAID)
+        //     ->orWhere(['username' => 'admin'])
+        //     // ->orderBy('level')
+        //     ->orderBy('created_at')
+        //     ->get()->toArray();
 
-        $n = count($users);
+        // $n = count($users);
         
-        $root = null;
-        $root = User::insertLevelOrder($users, 0, $n);
         // $root = null;
         // $root = User::insertLevelOrder($users, 0, $n);
-        $level = User::getLevel($root, User::find($id)->toArray());
+        // // $root = null;
+        // // $root = User::insertLevelOrder($users, 0, $n);
+        // $level = User::getLevel($root, User::find($id)->toArray());
         
         // $nodeSearched = User::search($root, '28056440-e9b4-4467-9a43-0203ae1b335a');
         // $totalLeft = User::getTotalLeft($root);
@@ -90,7 +90,7 @@ class UsersController extends Controller
         // $user->tiered_total = $tiered_total;
         // $user->gold_total = $gold_total;
 
-        $user->level = $level;
+        // $user->level = $level;
         $user->total = $user->commissions;
         return response()->json($user);
     }

@@ -22,34 +22,7 @@ class SystemTreeController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function generate_system_tree($tree_data, &$new_data, $direct_user_id = 0, $level = 0)
-    {
-        $children = [];
-        foreach ($tree_data as $k => $item) {
-            # code...
-            if ($item['direct_user_id'] == $direct_user_id) {
-                $item['level'] = $level;
-                array_push($children, $item);
-            }
-        }
-        if ($children) {
-            array_push($new_data, '<ul>');
-            foreach ($children as $k => $item) {
-                $avatar = $item['avatar'] ? asset($item['avatar']) :  asset(theme()->getMediaUrlPath() . 'avatars/blank.png');
-                # code...
-                $full_name = $item['first_name'] . ' ' . $item['last_name'];
-                array_push($new_data, "<li><a class='view_detail cursor-pointer' data-id='{$item['id']}' data-full_name='{$full_name}' data-level='{$item['level']}'>
-                <div class='symbol symbol-50px symbol-sm-30px'>
-																		<img src='{$avatar}' alt=''>
-                                                                        {$item['level']}
-																	</div>
-                </a>");
-                $this->generate_system_tree($tree_data, $new_data, $item['id'], $level + 1);
-                array_push($new_data, '</li>');
-            }
-            array_push($new_data, '</ul>');
-        }
-    }
+    
 
     function formatTree($tree, $parent)
     {
@@ -74,19 +47,68 @@ class SystemTreeController extends Controller
         // }])->Where(['username'=>'admin'])
         // ->get()->toArray();
         // dd($first);
-
-        $users = User::where('direct_user_id', '<>', null)
-            ->where('state' , AccountConstant::USER_STATE_PAID)
-            ->orWhere(['username' => 'admin'])
-            // ->orderBy('level')
-            ->orderBy('created_at')
-            ->get()->toArray();
-        // dd($users);
-        $n = count($users);
         $root = null;
-        $tree = '';
-        $root = User::insertLevelOrder($users, 0, $n);
-        User::printPreorder($root, $tree);
+
+        // $root = User::insert_node($root, 50);
+        // User::insert_node($root, 30);
+        // User::insert_node($root, 20);
+        // User::insert_node($root, 40);
+        // User::insert_node($root, 70);
+        // User::insert_node($root, 60);
+        // User::insert_node($root, 80);
+        // $user_id = auth()->user()->id;
+        $user_id = auth()->user()->id;
+        $user = User::with(['allChildren'])
+        ->where('state' , AccountConstant::USER_STATE_PAID)
+        ->where('id', $user_id)
+        ->first();
+
+        // $users = User::with('children', 'indirect_user')
+        // ->where('direct_user_id', '<>', null)
+        // ->where('indirect_user_id', '<>', null)
+        //     // ->where('state' , AccountConstant::USER_STATE_PAID)
+        //     ->orWhere(['username' => 'admin'])
+        //     // ->orderBy('level')
+        //     ->orderBy('created_at')
+        //     ->get()->toArray();
+            
+        // dd($users);
+        // $root = User::insert_node($root, $users[0]);
+        // for($i = 1; $i < count($users); $i++){
+        //     User::insert_node($root, $users[$i]);
+        // }
+        // $root = User::insert_node($root, $users[0]);
+        // User::insert_node($root, $users[1]);
+        // User::insert_node($root, $users[2]);
+        // User::insert_node($root, $users[2]);
+        // User::insert_node($root, $users[3]);
+        // User::insert_node($root, $users[4]);
+        // User::insert_node($root, $users[5]);
+        // User::insert_node($root, $users[6]);
+        // dd($root);
+        // $arr = $users[0]['children'];
+        // array_unshift($arr, $users[0]);
+
+        // $n = count($users[0]['children']);
+        // $root = User::insertLevelOrder($arr, 0, $n);
+        // dd(User::search($root, '5a123888-8840-494e-acf4-c9cd44bdf7c1')));
+        // User::insert_node($root, $users[7]);
+        // User::insert_node2($root, $users[7]);
+        // dd($root);
+
+        // User::printPreorder($root, $tree);
+
+        // $n = count($users);
+        // $root = null;
+        // $tree = '';
+        // // foreach($users as $user){
+        // //     User::insert($root, $user, $users);
+        // // }
+        // $root = User::insert($users, null);
+
+        // dd($root);
+        // $root = User::insertLevelOrder($users, 0, $n);
+
         // $level = User::getLevel($root, $users[11]);
         // dd($users[6]['first_name'], $level);
         // $nodeSearched = User::search($root, '28056440-e9b4-4467-9a43-0203ae1b335a');
@@ -95,9 +117,10 @@ class SystemTreeController extends Controller
         // dd($nodeSearched, $totalLeft, $totalRight);
 
         // dd($tree);
-        // dd($root);
+        // dd($users);
         // $this->insertLevelOrder($users, 0, $n, $tree);
         // $this->inOrder($root);
+        // $$tree ='';
         // $afterTree = $this->formatTree($users, 0);
         // dd($tree);
         // dd($root);
@@ -106,9 +129,19 @@ class SystemTreeController extends Controller
         // dd($users[1]);
 
         // dd($html);
-        // $tree = [];
-        // $this->generate_system_tree($users, $tree, null, 0);
-        // $tree = implode('', $tree);
+        // $user = User::find('e76294d6-38df-470a-a5ce-f62cb35cb8d2')->with('parents')->first();
+        // $parents = $user->parents;
+        // while(!empty($parents)){
+        //     dd($parents);
+        //     $parents = $parents->parents;
+        // }
+        $tree = [];
+
+        User::generate_system_tree($user, $tree, null, 0, $total);
+        // $total = User::calc_total($user);
+        // dump($total);
+        $tree = implode('', $tree);
+
         return view('team.system_tree.index', compact([
             'tree'
         ]));

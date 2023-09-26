@@ -123,7 +123,7 @@ class WalletController extends Controller
                     'indirect_user_id' => $indirect_user->id,
                     'state'             => AccountConstant::USER_STATE_PAID
                 ]);
-                User::handleUpgrade($direct_user->id);
+                User::handleUpgrade(auth()->user()->id, $indirect_user->id);
             }else{
                 $admin = User::getAdmin();
                 Transfer::create([
