@@ -142,9 +142,9 @@ class User extends Authenticatable
     }
     public function children()
     {
-        return $this->hasMany(self::class, 'indirect_user_id', 'id')->where('direct_user_id', '<>', null)->where('indirect_user_id', '<>', null)->orderBy('created_at');
-        ;
-        // ->where('state' , AccountConstant::USER_STATE_PAID);
+        return $this->hasMany(self::class, 'indirect_user_id', 'id')->where('direct_user_id', '<>', null)->where('indirect_user_id', '<>', null)->orderBy('created_at')
+        // ;
+        ->where('state' , AccountConstant::USER_STATE_PAID);
     }
     public function allChildren()
     {
@@ -437,8 +437,8 @@ class User extends Authenticatable
                 // $totalNode = $calc_total['total'];
                 $new_type = self::getAccountType(auth()->user()->type, $totalLeft, $totalRight);
                 // self::where(['id' => $user['id']])->update(['type' => $new_type]);
-                switch($user['type']){
-                // switch($new_type){
+                // switch($user['type']){
+                switch($new_type){
                     case AccountConstant::TYPE_USER_SAPHIRE:
                         $count_user_saphire = self::where(['type' => AccountConstant::TYPE_USER_SAPHIRE])->count();
                         if ($count_user_saphire > 0){
