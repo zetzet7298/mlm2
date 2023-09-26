@@ -70,7 +70,7 @@ class User extends Authenticatable
 
     public static function getAdmin()
     {
-        return self::where(['email' => 'admin@admin.com'])->first();
+        return User::where(['email' => 'admin@admin.com'])->first();
     }
 
     public static function isAdmin()
@@ -434,18 +434,17 @@ class User extends Authenticatable
 
     public static function handleUpgrade($user_id, $direct_user_id)
     {
-        $me = User::where(['id' => $user_id])->with(['parents', 'direct_user'])->first();
+        $me = User::where(['id' => $user_id])->with(['parents'])->first();
         User::where('id', $user_id)->update(['level' => $me->parents->level + 1, 'state' => AccountConstant::USER_STATE_PAID]);
         $user = $me->parents;
         while (!empty($user)) {
-            $total_coin = 0;
             $calc_total = self::calc_total($user);
             $totalLeft = $calc_total['totalLeft'];
             $totalRight = $calc_total['totalRight'];
             // $totalNode = $calc_total['total'];
-            $new_type = self::getAccountType(auth()->user()->type, $totalLeft, $totalRight);
+            $new_type = self::getAccountType($user['type'], $totalLeft, $totalRight);
             // dump($totalLeft, $totalRight, $new_type);
-            // self::where(['id' => $user['id']])->update(['type' => $new_type]);
+            // User::where(['id' => $user['id']])->update(['type' => $new_type]);
             $content = "branch bonus commissions";
             Income::create([
                 'user_id'        => $user['id'],
@@ -454,7 +453,7 @@ class User extends Authenticatable
             ]);
             // dd(Income::where('user_id', $user->id)->first());
 
-            self::where(['id' => $user['id']])->update([
+            User::where(['id' => $user['id']])->update([
                 'type' => $new_type,
                 'coin' => AccountConstant::INDIRECT_COMISSION + $user['coin'],
                 'commissions' => AccountConstant::INDIRECT_COMISSION + $user['commissions'],
@@ -463,7 +462,8 @@ class User extends Authenticatable
 
             $user = $user->parents;
         }
-        $old_direct_user = User::find($me->direct_user_id);
+
+        $old_direct_user = User::find($direct_user_id);
         User::where('id', $direct_user_id)->update([
             'coin' => AccountConstant::DIRECT_COMISSION + $old_direct_user['coin'],
             'commissions' => AccountConstant::DIRECT_COMISSION + $old_direct_user['commissions'],
@@ -471,7 +471,7 @@ class User extends Authenticatable
 
         $content = 'direct commission';
         Income::create([
-            'user_id'        => $me->direct_user['id'],
+            'user_id'        => $direct_user_id,
             'coin'             => AccountConstant::DIRECT_COMISSION,
             'content'             => $content,
         ]);
@@ -484,19 +484,19 @@ class User extends Authenticatable
             $gold_commission = 0;
             switch ($gold_user->type) {
                 case AccountConstant::TYPE_USER_SAPHIRE:
-                    $count_user_saphire = self::where(['type' => AccountConstant::TYPE_USER_SAPHIRE])->count();
+                    $count_user_saphire = User::where(['type' => AccountConstant::TYPE_USER_SAPHIRE])->count();
                     if ($count_user_saphire > 0) {
                         $gold_commission = (AccountConstant::DIRECT_COMISSION * (3 / 100)) / $count_user_saphire;
                     }
                     break;
                 case AccountConstant::TYPE_USER_RUBY:
-                    $count_user_ruby = self::where(['type' => AccountConstant::TYPE_USER_SAPHIRE])->count();
+                    $count_user_ruby = User::where(['type' => AccountConstant::TYPE_USER_SAPHIRE])->count();
                     if ($count_user_ruby > 0) {
                         $gold_commission = (AccountConstant::DIRECT_COMISSION * (5 / 100)) / $count_user_ruby;
                     }
                     break;
                 case AccountConstant::TYPE_USER_DIAMOND:
-                    $count_user_diamond = self::where(['type' => AccountConstant::TYPE_USER_SAPHIRE])->count();
+                    $count_user_diamond = User::where(['type' => AccountConstant::TYPE_USER_SAPHIRE])->count();
                     if ($count_user_diamond > 0) {
                         $gold_commission = (AccountConstant::DIRECT_COMISSION * (7 / 100)) / $count_user_diamond;
                     }
@@ -511,7 +511,7 @@ class User extends Authenticatable
                     'content'             => $content,
                 ]);
 
-                self::where(['id' => $gold_user['id']])->update([
+                User::where(['id' => $gold_user['id']])->update([
                     'coin' => $gold_commission + $gold_user['coin'],
                     'commissions' => $gold_commission + $gold_user['commissions'],
                 ]);
@@ -532,7 +532,7 @@ class User extends Authenticatable
         // }
     }
     // public static function handleUpgrade($direct_user_id){
-    //     $users = self::where('direct_user_id', '<>', null)
+    //     $users = User::where('direct_user_id', '<>', null)
     //     ->where('state' , AccountConstant::USER_STATE_PAID)
     //         ->orWhere(['username' => 'admin'])
     //         // ->orderBy('level')
@@ -558,23 +558,23 @@ class User extends Authenticatable
 
 
     //             $new_type = self::getAccountType(auth()->user()->type, $totalLeft, $totalRight);
-    //             // self::where(['id' => $user['id']])->update(['type' => $new_type]);
+    //             // User::where(['id' => $user['id']])->update(['type' => $new_type]);
     //             switch($user['type']){
     //             // switch($new_type){
     //                 case AccountConstant::TYPE_USER_SAPHIRE:
-    //                     $count_user_saphire = self::where(['type' => AccountConstant::TYPE_USER_SAPHIRE])->count();
+    //                     $count_user_saphire = User::where(['type' => AccountConstant::TYPE_USER_SAPHIRE])->count();
     //                     if ($count_user_saphire > 0){
     //                         $gold_commission = (AccountConstant::DIRECT_COMISSION * (3/100))/$count_user_saphire;
     //                     }
     //                     break;
     //                 case AccountConstant::TYPE_USER_RUBY:
-    //                     $count_user_ruby = self::where(['type' => AccountConstant::TYPE_USER_SAPHIRE])->count();
+    //                     $count_user_ruby = User::where(['type' => AccountConstant::TYPE_USER_SAPHIRE])->count();
     //                     if ($count_user_ruby > 0){
     //                         $gold_commission = (AccountConstant::DIRECT_COMISSION * (5/100))/$count_user_ruby;
     //                     }
     //                     break;
     //                 case AccountConstant::TYPE_USER_DIAMOND:
-    //                     $count_user_diamond = self::where(['type' => AccountConstant::TYPE_USER_SAPHIRE])->count();
+    //                     $count_user_diamond = User::where(['type' => AccountConstant::TYPE_USER_SAPHIRE])->count();
     //                     if ($count_user_diamond > 0){
     //                         $gold_commission= (AccountConstant::DIRECT_COMISSION * (7/100))/$count_user_diamond;
     //                     }
@@ -602,7 +602,7 @@ class User extends Authenticatable
     //                         'content'             => $content,
     //                     ]);
     //                 }
-    //                 self::where(['id' => $user['id']])->update([
+    //                 User::where(['id' => $user['id']])->update([
     //                     'commissions' => $total_coin
     //                 ]);
     //                 if($totalNode > 0){
