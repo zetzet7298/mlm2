@@ -37,7 +37,7 @@ class UsersSeeder extends Seeder
             'created_at' => now()->addMinute(1),
             'level' => 1,
         ]);
-
+        dd();
         $user1 = User::create([
             'id' => Str::uuid()->toString(),
 'username'        => $faker->username,
