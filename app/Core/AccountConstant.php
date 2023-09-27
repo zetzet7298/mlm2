@@ -22,6 +22,7 @@ class AccountConstant
     const PERCENTAGE_COMISSION_RUBY = 2;
     const PERCENTAGE_COMISSION_DIAMOND = 2;
 
+    const GOLD_COMISSION = 40;
     const ADMIN_TRANSFER = 40;
     const COIN_NEED_UPGRADE = 40;
 }

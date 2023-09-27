@@ -435,7 +435,6 @@ class User extends Authenticatable
     public static function handleUpgrade($user_id, $direct_user_id)
     {
         $me = User::where(['id' => $user_id])->with(['parents'])->first();
-        User::where('id', $user_id)->update(['level' => $me->parents->level + 1, 'state' => AccountConstant::USER_STATE_PAID]);
         $user = $me->parents;
         while (!empty($user)) {
             $calc_total = self::calc_total($user);
@@ -484,21 +483,21 @@ class User extends Authenticatable
             $gold_commission = 0;
             switch ($gold_user->type) {
                 case AccountConstant::TYPE_USER_SAPHIRE:
-                    $count_user_saphire = User::where(['type' => AccountConstant::TYPE_USER_SAPHIRE])->count();
+                    $count_user_saphire = User::where(['type' => AccountConstant::GOLD_COMISSION])->count();
                     if ($count_user_saphire > 0) {
                         $gold_commission = (AccountConstant::DIRECT_COMISSION * (3 / 100)) / $count_user_saphire;
                     }
                     break;
                 case AccountConstant::TYPE_USER_RUBY:
-                    $count_user_ruby = User::where(['type' => AccountConstant::TYPE_USER_SAPHIRE])->count();
+                    $count_user_ruby = User::where(['type' => AccountConstant::GOLD_COMISSION])->count();
                     if ($count_user_ruby > 0) {
-                        $gold_commission = (AccountConstant::DIRECT_COMISSION * (5 / 100)) / $count_user_ruby;
+                        $gold_commission = (AccountConstant::DIRECT_COMISSION * (2 / 100)) / $count_user_ruby;
                     }
                     break;
                 case AccountConstant::TYPE_USER_DIAMOND:
-                    $count_user_diamond = User::where(['type' => AccountConstant::TYPE_USER_SAPHIRE])->count();
+                    $count_user_diamond = User::where(['type' => AccountConstant::GOLD_COMISSION])->count();
                     if ($count_user_diamond > 0) {
-                        $gold_commission = (AccountConstant::DIRECT_COMISSION * (7 / 100)) / $count_user_diamond;
+                        $gold_commission = (AccountConstant::DIRECT_COMISSION * (2 / 100)) / $count_user_diamond;
                     }
                     break;
             }
@@ -517,7 +516,8 @@ class User extends Authenticatable
                 ]);
             }
         }
-        // dd(1);
+        User::where('id', $user_id)->update(['level' => $me->parents->level + 1, 'state' => AccountConstant::USER_STATE_PAID]);
+
         // $users = self::with(['allChildren'])
         //     ->orderBy('created_at')
         //     ->get()->toArray();

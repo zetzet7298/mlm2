@@ -121,7 +121,7 @@ class WalletController extends Controller
                     'type' => AccountConstant::TYPE_USER_MEMBER,
                     'direct_user_id' => $direct_user->id,
                     'indirect_user_id' => $indirect_user->id,
-                    'state'             => AccountConstant::USER_STATE_PAID
+                    // 'state'             => AccountConstant::USER_STATE_PAID
                 ]);
                 User::handleUpgrade(auth()->user()->id, $direct_user->id);
             }else{
