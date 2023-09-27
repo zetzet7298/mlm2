@@ -483,21 +483,21 @@ class User extends Authenticatable
             $gold_commission = 0;
             switch ($gold_user->type) {
                 case AccountConstant::TYPE_USER_SAPHIRE:
-                    $count_user_saphire = User::where(['type' => AccountConstant::GOLD_COMISSION])->count();
+                    $count_user_saphire = User::where(['type' => AccountConstant::TYPE_USER_SAPHIRE])->count();
                     if ($count_user_saphire > 0) {
-                        $gold_commission = (AccountConstant::DIRECT_COMISSION * (3 / 100)) / $count_user_saphire;
+                        $gold_commission = (AccountConstant::GOLD_COMISSION * (3 / 100)) / $count_user_saphire;
                     }
                     break;
                 case AccountConstant::TYPE_USER_RUBY:
-                    $count_user_ruby = User::where(['type' => AccountConstant::GOLD_COMISSION])->count();
+                    $count_user_ruby = User::where(['type' => AccountConstant::TYPE_USER_RUBY])->count();
                     if ($count_user_ruby > 0) {
-                        $gold_commission = (AccountConstant::DIRECT_COMISSION * (2 / 100)) / $count_user_ruby;
+                        $gold_commission = (AccountConstant::GOLD_COMISSION * (2 / 100)) / $count_user_ruby;
                     }
                     break;
                 case AccountConstant::TYPE_USER_DIAMOND:
-                    $count_user_diamond = User::where(['type' => AccountConstant::GOLD_COMISSION])->count();
+                    $count_user_diamond = User::where(['type' => AccountConstant::TYPE_USER_DIAMOND])->count();
                     if ($count_user_diamond > 0) {
-                        $gold_commission = (AccountConstant::DIRECT_COMISSION * (2 / 100)) / $count_user_diamond;
+                        $gold_commission = (AccountConstant::GOLD_COMISSION * (2 / 100)) / $count_user_diamond;
                     }
                     break;
             }
