@@ -15,7 +15,8 @@ class CreateIncomeTable extends Migration
     {
         Schema::create('income', function (Blueprint $table) {
             $table->id();
-            $table->uuid('user_id');
+            // $table->uuid('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->double('coin');
             $table->string('content', 255)->nullable();
             $table->foreign('user_id')->references('id')->on('users');

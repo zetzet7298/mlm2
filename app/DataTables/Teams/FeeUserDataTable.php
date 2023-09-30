@@ -42,7 +42,7 @@ class FeeUserDataTable extends DataTable
             })
             ->addColumn('action', function (User $model) {
                 if($model->state == AccountConstant::USER_STATE_PAID){
-                    return view('pages.teams.users._action-menu', compact('model'));
+                    return view('pages..teams.users._action-menu', compact('model'));
                 }
                 return '';
             })

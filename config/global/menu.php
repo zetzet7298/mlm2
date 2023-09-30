@@ -389,11 +389,13 @@ return array(
                         'bullet' => '<span class="bullet bullet-dot"></span>',
                     ),
                     array(
+            'role' => 'admin',
                         'title'  => 'Free Introduction List',
                         'path'   => 'team/users',
                         'bullet' => '<span class="bullet bullet-dot"></span>',
                     ),
                     array(
+            'role' => 'admin',
                         'title'      => 'Fee Introduction List',
                         'path'       => 'team/fee-users',
                         'bullet'     => '<span class="bullet bullet-dot"></span>',
@@ -448,7 +450,16 @@ return array(
         // artificial intelligence
         array(
             'title'      => 'Artificial Intelligence',
-            'path'   => 'chatgpt',
+            'path'   => '#',
+            'attributes' => array(
+                'link' => array(
+                    "title"             => "Coming soon",
+                    "data-bs-toggle"    => "tooltip",
+                    "data-bs-trigger"   => "hover",
+                    "data-bs-dismiss"   => "click",
+                    "data-bs-placement" => "right",
+                ),
+            ),
         ),
         // gift
         array(
@@ -464,7 +475,51 @@ return array(
                 ),
             ),
         ),
-
+        // gift
+        array(
+            'role' => 'admin|member',
+            'title'      => 'Product',
+            'classes'    => array('item' => 'menu-lg-down-accordion me-lg-1', 'arrow' => 'd-lg-none'),
+            'attributes' => array(
+                'data-kt-menu-trigger'   => "click",
+                'data-kt-menu-placement' => "bottom-start",
+            ),
+            'sub'        => array(
+                'class' => 'menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px',
+                'items' => array(
+            'role' => 'admin|member',
+                    array(
+                        'title'  => 'Product List',
+                        'path'   => 'management/products',
+                        'bullet' => '<span class="bullet bullet-dot"></span>',
+                    ),
+                    array(
+            'role' => 'admin|member',
+                        'title'  => 'Add Product',
+                        'path'   => 'management/products/create',
+                        'bullet' => '<span class="bullet bullet-dot"></span>',
+                    ),
+                    array(
+            'role' => 'admin|member',
+                        'title'  => 'Category List',
+                        'path'   => 'management/category',
+                        'bullet' => '<span class="bullet bullet-dot"></span>',
+                    ),
+                    array(
+            'role' => 'admin|member',
+                        'title'  => 'Add Category',
+                        'path'   => 'management/category/create',
+                        'bullet' => '<span class="bullet bullet-dot"></span>',
+                    ),
+                ),
+            )
+        ),
+        // gift
+        array(
+            'role' => 'admin',
+            'title'      => 'Order',
+            'path'       => 'management/order',
+        ),
         // // System
         // array(
         //     'title'      => 'System',

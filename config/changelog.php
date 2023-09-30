@@ -44,8 +44,8 @@ return array(
         'date'      => '21 August, 2021',
         'changelog' => array(
             'new' => array(
-                'Added new <code>Demo 3</code> layout. See <a href="https://preview.keenthemes.com/metronic8/laravel/login?demo=demo3">preview</a>.',
-                'Added new <code>Demo 3</code> dark layout. See <a href="https://preview.keenthemes.com/metronic8/laravel/login?demo=demo3&mode=dark">preview</a>.',
+                'Added new <code>Demo 3</code> demo2.layout. See <a href="https://preview.keenthemes.com/metronic8/laravel/login?demo=demo3">preview</a>.',
+                'Added new <code>Demo 3</code> dark demo2.layout. See <a href="https://preview.keenthemes.com/metronic8/laravel/login?demo=demo3&mode=dark">preview</a>.',
             ),
 
             'update' => array(
@@ -68,7 +68,7 @@ return array(
         'date'      => '06 August, 2021',
         'changelog' => array(
             'new' => array(
-                'Added new <code>Demo 4</code> layout. See <a href="https://preview.keenthemes.com/metronic8/laravel/login?demo=demo4">preview</a>.',
+                'Added new <code>Demo 4</code> demo2.layout. See <a href="https://preview.keenthemes.com/metronic8/laravel/login?demo=demo4">preview</a>.',
             ),
 
             'update' => array(
@@ -89,7 +89,7 @@ return array(
         'date'      => '30 July, 2021',
         'changelog' => array(
             'new' => array(
-                'Added new <code>Demo 3</code> layout. See <a href="https://preview.keenthemes.com/metronic8/laravel/login?demo=demo3">preview</a>.',
+                'Added new <code>Demo 3</code> demo2.layout. See <a href="https://preview.keenthemes.com/metronic8/laravel/login?demo=demo3">preview</a>.',
             ),
 
             'update' => array(
@@ -136,7 +136,7 @@ return array(
         'date'      => '16 July, 2021',
         'changelog' => array(
             'new' => array(
-                'Added new <code>Demo 2</code> layout. Updated <code>webpack.mix.js</code> to build <code>Demo 2</code> asset files. See <a href="https://preview.keenthemes.com/metronic8/laravel/login?demo=demo2">preview</a>.',
+                'Added new <code>Demo 2</code> demo2.layout. Updated <code>webpack.mix.js</code> to build <code>Demo 2</code> asset files. See <a href="https://preview.keenthemes.com/metronic8/laravel/login?demo=demo2">preview</a>.',
                 'Added <code>Demo 1 Dark Mode</code>. Updated <code>webpack.mix.js</code> to build dark CSS files. See <a href="https://preview.keenthemes.com/metronic8/laravel/index?mode=dark">preview</a>',
             ),
 

@@ -14379,7 +14379,7 @@ function _fnBuildHead( oSettings )
 /**
  * Draw the header (or footer) element based on the column visibility states. The
  * methodology here is to use the layout array from _fnDetectHeader, modified for
- * the instantaneous column visibility, to construct the new layout. The grid is
+ * the instantaneous column visibility, to construct the new demo2.layout. The grid is
  * traversed over cell at a time in a rows x columns grid fashion, although each
  * cell insert can cover multiple elements in the grid - which is tracks using the
  * aApplied array. Cell inserts in the grid will only occur where there isn't

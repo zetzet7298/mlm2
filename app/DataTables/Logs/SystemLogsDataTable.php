@@ -57,10 +57,10 @@ class SystemLogsDataTable extends DataTable
             ->editColumn('context', function (Collection $model) {
                 $content = $model->get('context');
 
-                return view('pages.log.system._details', compact('content'));
+                return view('pages..log.system._details', compact('content'));
             })
             ->addColumn('action', function (Collection $model) {
-                return view('pages.log.system._action-menu', compact('model'));
+                return view('pages..log.system._action-menu', compact('model'));
             });
     }
 

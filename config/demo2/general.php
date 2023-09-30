@@ -12,6 +12,7 @@ return array(
             'plugins/global/plugins.bundle.css',
             'plugins/global/plugins-custom.bundle.css',
             'css/style.bundle.css',
+            'css/app.css',
             'css/pages/team/system-tree.css',
         ),
         'js'      => array(

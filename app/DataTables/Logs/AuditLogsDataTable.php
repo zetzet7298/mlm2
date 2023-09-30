@@ -40,13 +40,13 @@ class AuditLogsDataTable extends DataTable
             ->editColumn('properties', function (Activity $model) {
                 $content = $model->properties;
 
-                return view('pages.log.audit._details', compact('content'));
+                return view('pages..log.audit._details', compact('content'));
             })
             ->editColumn('created_at', function (Activity $model) {
                 return $model->created_at->format('d M, Y H:i:s');
             })
             ->addColumn('action', function (Activity $model) {
-                return view('pages.log.audit._action-menu', compact('model'));
+                return view('pages..log.audit._action-menu', compact('model'));
             });
     }
 

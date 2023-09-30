@@ -15,8 +15,10 @@ class CreateTransferTable extends Migration
     {
         Schema::create('transfer', function (Blueprint $table) {
             $table->id();
-            $table->uuid('sender_id');
-            $table->uuid('receiver_id');
+            // $table->uuid('sender_id');
+            // $table->uuid('receiver_id');
+            $table->unsignedBigInteger('sender_id')->nullable();
+            $table->unsignedBigInteger('receiver_id')->nullable();
             $table->double('coin');
             $table->string('content', 255)->nullable();
             $table->foreign('sender_id')->references('id')->on('users');

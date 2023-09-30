@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
 use Illuminate\Support\Facades\File;
 
 class PagesController extends Controller
@@ -15,8 +16,16 @@ class PagesController extends Controller
     {
         // Get view file location from menu config
         $view = theme()->getOption('page', 'view');
-
         // Check if the page view file exist
+        if ($view == 'index'){
+            $products = Product::active()->orderBy('created_at')->orderBy('featured', 'desc')->take(3)->get();
+            $hotProducts = Product::inRandomOrder()->take(6)->get();
+            // dd($hotProducts);
+            return view('pages.'.$view)->with([
+                'products'=> $products,
+                'hotProducts' => $hotProducts
+            ]);
+        }
         if (view()->exists('pages.'.$view)) {
             return view('pages.'.$view);
         }

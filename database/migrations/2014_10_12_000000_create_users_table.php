@@ -14,8 +14,9 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->uuid('id');
-            $table->primary('id');
+            // $table->uuid('id');
+            // $table->primary('id');
+            $table->bigIncrements('id');
             $table->smallInteger('level')->default(0);
             $table->string('first_name');
             $table->string('last_name');
@@ -32,8 +33,10 @@ class CreateUsersTable extends Migration
             $table->double('coin')->default(0);
             $table->double('commissions')->default(0);
             $table->tinyInteger('state')->default(0);
-            $table->uuid('direct_user_id')->nullable();
-            $table->uuid('indirect_user_id')->nullable();
+            // $table->uuid('direct_user_id')->nullable();
+            // $table->uuid('indirect_user_id')->nullable();
+            $table->unsignedBigInteger('direct_user_id')->nullable();
+            $table->unsignedBigInteger('indirect_user_id')->nullable();
             $table->foreign('direct_user_id')->references('id')->on('users');
             $table->foreign('indirect_user_id')->references('id')->on('users');
             $table->timestamps();

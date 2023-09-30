@@ -10,15 +10,15 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends \TCG\Voyager\Models\User
 // implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
     use SpatieLogsActivity;
-    use HasRoles;
-    protected $primaryKey = 'id';
-    public $incrementing = false;
-    public $keyType = 'string';
+    // use HasRoles;
+    // protected $primaryKey = 'id';
+    // public $incrementing = false;
+    // public $keyType = 'string';
 
     /**
      * The attributes that are mass assignable.
@@ -26,7 +26,6 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'id',
         'commissions',
         'username',
         'type',
@@ -193,9 +192,9 @@ class User extends Authenticatable
         # code...
         $full_name = $parent->first_name . ' ' . $parent->last_name;
         array_push($new_data, "<li><a class='view_detail cursor-pointer' data-id='{$parent->id}' data-full_name='{$full_name}'>
-        <div class='symbol symbol-50px symbol-sm-30px'>
+        <div class='symbol symbol-20px symbol-sm-20px'>
                                                                 <img src='{$avatar}' alt=''>
-                                                                {$full_name}
+
                                                             </div>
         </a>");
         $children = $parent->allChildren;

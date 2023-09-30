@@ -15,7 +15,8 @@ class CreateTableWithdrawalTable extends Migration
     {
         Schema::create('withdrawal', function (Blueprint $table) {
             $table->id();
-            $table->uuid('user_id');
+            // $table->uuid('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->double('coin');
             $table->string('method', 50)->nullable();
             $table->string('content', 255)->nullable();

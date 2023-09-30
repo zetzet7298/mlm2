@@ -12,9 +12,9 @@ class BaseLayout extends Component
     public function render()
     {
         if (theme()->getOption('layout', 'base') === 'docs') {
-            return view('layout.docs.master');
+            return view('demo2.layout.docs.master');
         }
 
-        return theme()->getView('layout.master');
+        return theme()->getView('demo2.layout.demo2.master');
     }
 }

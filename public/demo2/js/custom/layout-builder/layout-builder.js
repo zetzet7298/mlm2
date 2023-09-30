@@ -10967,7 +10967,7 @@ var KTLayoutBuilder = function () {
         url: url,
         data: data,
         success: function success(response, status, xhr) {
-          toastr.success("Preview has been updated with current configured layout.", "Preview updated!", {
+          toastr.success("Preview has been updated with current configured demo2.layout.", "Preview updated!", {
             timeOut: 0,
             extendedTimeOut: 0,
             closeButton: true,

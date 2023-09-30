@@ -11,7 +11,9 @@
     <div class="d-flex align-items-center me-n3 {{ $toolbarButtonMarginClass }}" id="kt_header_user_menu_toggle">
         <!--begin::Menu wrapper-->
         <div class="btn btn-icon btn-active-light-primary {{ $toolbarButtonHeightClass }}" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
+            @if(!empty(auth()->user()))
             <img class="h-25px w-25px rounded" src="{{ auth()->user()->avatar_url }}" alt="avatar"/>
+            @endif
         </div>
     {{ theme()->getView('partials/topbar/_user-menu') }}
     <!--end::Menu wrapper-->
