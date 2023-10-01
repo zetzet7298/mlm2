@@ -1,7 +1,7 @@
 <!--begin::Action--->
 <td class="text-end">
-    <button data-destroy="{{ route('log.audit.destroy', $model->id) }}" class="btn btn-sm btn-light btn-active-light-primary">
-        Delete
-    </button>
+    <a href="{{ route('wallet.withdrawal.confirm', ['id' => $model->id]) }}" class="btn btn-sm btn-light btn-active-light-primary" onclick="return confirm('Are you sure ?')">
+        Confirmed withdrawal
+    </a>
 </td>
 <!--end::Action--->

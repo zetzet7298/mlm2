@@ -3,6 +3,7 @@
 namespace App\DataTables\Wallets;
 
 use App\Core\AccountConstant;
+use App\Models\User;
 use App\Models\Withdrawal;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -25,6 +26,18 @@ class WithdrawalDataTable extends DataTable
             ->editColumn('created_at', function (Withdrawal $model) {
                 return date($model->created_at->format('d-m-Y H:i:s'));
             })
+            ->editColumn('coin', function (Withdrawal $model) {
+                return number_format($model->coin) . '$';
+            })
+            ->editColumn('user_id', function (Withdrawal $model) {
+                return $model->user ? $model->user->username : '';
+            })
+            ->addColumn('action', function (Withdrawal $model) {
+                if(!$model->is_received){
+                    return view('pages.wallets.withdrawal._action-menu', compact('model'));
+                }
+                return '';
+            })
             ;
     }
 
@@ -36,7 +49,12 @@ class WithdrawalDataTable extends DataTable
      */
     public function query(Withdrawal $model)
     {
-        return $model->with('user')->where(['user_id' => auth()->id()])->newQuery();
+
+        if(User::isAdmin()){
+            return $model->with('user')->newQuery();
+        }else{
+            return $model->with('user')->where(['user_id' => auth()->id()])->newQuery();
+        }
     }
 
     /**
@@ -76,8 +94,15 @@ class WithdrawalDataTable extends DataTable
             //       ->addClass('text-center'),
             // Column::make('id'),
             Column::make('created_at')->title(__('Date')),
+            Column::make('user_id')->title(__('Username')),
             Column::make('coin'),
+            Column::make('address'),
             Column::make('content')->title(__('Content')),
+            Column::computed('action')
+            ->exportable(false)
+            ->printable(false)
+            ->width(170)
+            ->addClass('text-center'),
             // Column::make('user_id')->title(__('User')),
             // Column::make('updated_at'),
         ];

@@ -18,8 +18,10 @@ class CreateTableWithdrawalTable extends Migration
             // $table->uuid('user_id');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->double('coin');
+            $table->string('address', 50)->nullable();
             $table->string('method', 50)->nullable();
             $table->string('content', 255)->nullable();
+            $table->boolean('is_received')->default(false);
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });

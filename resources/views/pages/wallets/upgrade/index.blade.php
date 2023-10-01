@@ -103,11 +103,44 @@
                     <!--begin::Input group-->
                     <div class="mb-10">
                         <!--begin::Label-->
-                        <label class="form-label fw-bolder fs-6 text-gray-700">Please scan the QR code below to
-                            transfer</label>
+                        <div class="form-label fw-bolder fs-6 text-gray-700">Please scan the QR code below to
+                            transfer</div>
                         <!--end::Label-->
                         <!--begin::Select-->
+                        <div class="symbol symbol-150px">
+                            <img src="{{ asset('images/qr.jpg') }}">
+                        </div>
+                                                <!--begin::Col-->
+                        <div class="col-lg-8 d-flex align-items-center">
+                            <!--begin::Input-->
+                            <div id="kt_clipboard_4" class="me-5 fw-bolder fs-6 text-dark">TG2hLZ1hk7k5jFsdVD4ikkq7wGha98EKmA</div>
+                            <!--end::Input-->
+
+                            <!--begin::Button-->
+                            <button class="btn btn-icon btn-sm btn-light" data-clipboard-target="#kt_clipboard_4">
+                                <i class="bi bi-copy"></i>
+                            </button>
+                            <!--end::Button-->
+                        </div>
+                        <!--end::Col-->
                         <div class="fs-6">
+<!--begin::Alert-->
+<div class="alert alert-primary">
+    <!--begin::Icon-->
+    {{-- <span class="svg-icon svg-icon-2hx svg-icon-primary me-3">...</span> --}}
+    <!--end::Icon-->
+
+    <!--begin::Wrapper-->
+    <div class="d-flex flex-column">
+        <!--begin::Title-->
+        <!--end::Title-->
+        <!--begin::Content-->
+        <span>Send only Tether (TRC20) to this address. Sending any other coins may result in permanent loss</span>
+        <!--end::Content-->
+    </div>
+    <!--end::Wrapper-->
+</div>
+<!--end::Alert-->
 
                         </div>
                         <!--end::Select-->

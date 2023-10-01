@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Income;
 use App\Models\Transfer;
 use App\Models\User;
+use App\Models\Withdrawal;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Action;
 use Illuminate\Support\Facades\DB;
@@ -61,6 +62,73 @@ class WalletController extends Controller
                 'receiver_id'         => $receiver->id,
                 'coin'             => $receiver_new_coin,
                 'content'             => 'Transfer coin',
+            ]);
+            DB::commit();
+            return redirect()->back()->with("success", "Success!");
+            // all good
+        } catch (\Exception $e) {
+            report($e);
+            DB::rollback();
+            return redirect()->back()->with("error", "Failed");
+            // something went wrong
+        }
+    }
+
+    public function confirm($id){
+        if(!User::isAdmin()){
+            return redirect()->back()->with("error", "Now allow!");
+        }
+        $find = Withdrawal::find($id);
+        if(empty($find)){
+            return redirect()->back()->with("error", "Not found!");
+        }
+        DB::beginTransaction();
+        try {     
+            $user = User::find($find->user_id);
+            $new_coin = $user->coin - floatval($find->coin);
+            User::where('id', $find->user_id)->update([
+                'coin' =>  $new_coin,
+            ]);
+
+            Withdrawal::where('id', $id)->update([
+                'is_received' => true
+            ]);
+            DB::commit();
+            return redirect()->back()->with("success", "Success!");
+            // all good
+        } catch (\Exception $e) {
+            report($e);
+            DB::rollback();
+            return redirect()->back()->with("error", "Failed");
+            // something went wrong
+        }
+    }
+
+    public function withdrawal(Request $request){
+        // if(empty(User::where(['username' => $request->username])->first()) || $request->username == auth()->user()->username){
+        //     return redirect()->back()->with("error", "Receiver Not Exists!");
+        // }
+        if(auth()->user()->coin < 100){
+            return redirect()->back()->with("error", "A minimum account balance of $100 is allowed to withdraw!");
+        }
+        if($request->coin > auth()->user()->coin){
+            return redirect()->back()->with("error", "Insufficient balance!");
+        }
+        if(Hash::check($request->password2, auth()->user()->password2) == False){
+            return redirect()->back()->with("error", "Level 2 password does not match, please check again!");
+        }
+        DB::beginTransaction();
+        try {     
+            $new_coin = auth()->user()->coin - floatval($request->coin);
+            auth()->user()->update([
+                'coin' =>  $new_coin,
+            ]);
+
+            Withdrawal::create([
+                'user_id'        => auth()->user()->id,
+                'address'        => $request->address,
+                'coin'             => floatval($request->coin),
+                'content'             => 'Cashwithdrawal',
             ]);
             DB::commit();
             return redirect()->back()->with("success", "Success!");

@@ -464,16 +464,16 @@ return array(
         // gift
         array(
             'title'      => 'Gift',
-            'path'       => '#',
-            'attributes' => array(
-                'link' => array(
-                    "title"             => "Coming soon",
-                    "data-bs-toggle"    => "tooltip",
-                    "data-bs-trigger"   => "hover",
-                    "data-bs-dismiss"   => "click",
-                    "data-bs-placement" => "right",
-                ),
-            ),
+            'path'       => 'gift',
+            // 'attributes' => array(
+            //     'link' => array(
+            //         "title"             => "Coming soon",
+            //         "data-bs-toggle"    => "tooltip",
+            //         "data-bs-trigger"   => "hover",
+            //         "data-bs-dismiss"   => "click",
+            //         "data-bs-placement" => "right",
+            //     ),
+            // ),
         ),
         // gift
         array(

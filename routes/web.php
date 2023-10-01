@@ -22,6 +22,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\VisitsController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\GiftController;
 use App\Http\Controllers\OrderController;
 use TCG\Voyager\Facades\Voyager;
 
@@ -96,6 +97,7 @@ array_walk($menu, function ($val) {
 
         Route::get('management/order', [OrderController::class, 'index']);
         Route::get('management/order/{id}', [OrderController::class, 'show'])->name('order.detail');
+        Route::get('gift', [GiftController::class, 'index']);
 
         Route::prefix('wallet')->name('wallet.')->group(function () {
             Route::get('upgrade', [WalletController::class, 'indexUpgrade'])->name('upgrade.index');
@@ -104,6 +106,8 @@ array_walk($menu, function ($val) {
             Route::get('transfer-history', [WalletController::class, 'indexTransferHistory']);
             Route::post('transfer', [WalletController::class, 'create'])->name('transfer.create');
             Route::get('withdrawal-history', [WalletController::class, 'indexWithdrawalHistory']);
+            Route::post('withdrawal', [WalletController::class, 'withdrawal'])->name('withdrawal');
+            Route::get('withdrawal/confirm/{id}', [WalletController::class, 'confirm'])->name('withdrawal.confirm');
         });
     });
     Route::resource('users', UsersController::class);

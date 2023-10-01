@@ -25,4 +25,6 @@ class AccountConstant
     const GOLD_COMISSION = 40;
     const ADMIN_TRANSFER = 40;
     const COIN_NEED_UPGRADE = 40;
+
+    // const WITHDRAWAL_RECEIVER = 
 }
