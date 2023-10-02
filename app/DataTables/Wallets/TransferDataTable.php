@@ -92,6 +92,7 @@ class TransferDataTable extends DataTable
             Column::make('receiver_id')->title(__('Receiver')),
             Column::make('coin'),
             Column::make('content')->title((__('Transfer Content'))),
+            Column::make('txid')->title((__('TxID'))),
             // Column::make('state'),
             // Column::make('updated_at'),
         ];

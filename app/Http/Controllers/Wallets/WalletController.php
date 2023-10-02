@@ -178,6 +178,7 @@ class WalletController extends Controller
             // ]);
             if($request->enough){
                 Transfer::create([
+                    // 'txid'        => $request->txid,
                     'sender_id'        => auth()->user()->id,
                     'receiver_id'         => auth()->user()->id,
                     'coin'             => -AccountConstant::COIN_NEED_UPGRADE,
@@ -195,6 +196,7 @@ class WalletController extends Controller
             }else{
                 $admin = User::getAdmin();
                 Transfer::create([
+                    'txid'        => $request->txid,
                     'sender_id'        => $admin->id,
                     'receiver_id'         => auth()->user()->id,
                     'coin'             => AccountConstant::ADMIN_TRANSFER,

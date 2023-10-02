@@ -125,7 +125,7 @@
                         <!--end::Col-->
                         <div class="fs-6">
 <!--begin::Alert-->
-<div class="alert alert-primary">
+<div class="alert-danger">
     <!--begin::Icon-->
     {{-- <span class="svg-icon svg-icon-2hx svg-icon-primary me-3">...</span> --}}
     <!--end::Icon-->
@@ -135,17 +135,32 @@
         <!--begin::Title-->
         <!--end::Title-->
         <!--begin::Content-->
-        <span>Send only Tether (TRC20) to this address. Sending any other coins may result in permanent loss</span>
+        <div class="px-4 fs-6 fw-bold">Note: Send only Tether (TRC20) to this address. Sending any other coins may result in permanent loss</div>
         <!--end::Content-->
     </div>
     <!--end::Wrapper-->
 </div>
+<!--end::Alert-->
 <!--end::Alert-->
 
                         </div>
                         <!--end::Select-->
                     </div>
                     <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="mb-10">
+                        <!--begin::Label-->
+                        <label class="form-label fw-bolder fs-6 text-gray-700">TxID</label>
+                        <!--end::Label-->
+                        <!--begin::Select-->
+                        <div class="fs-6">
+                            <input class="form-control form-control-lg form-control-solid" required type="text"
+                            name="txid" autocomplete="off" value="" />
+                        </div>
+                        <!--end::Select-->
+                    </div>
+                    <!--end::Input group-->
+
                     <!--begin::Separator-->
                     <div class="separator separator-dashed mb-8"></div>
                     <!--end::Separator-->
@@ -198,5 +213,67 @@
         <!--end::Card body-->
     </div>
     <!--end::Card-->
+    @section('scripts')
+<script>
+    function myclipboard(id){
+        // Select elements
+const target = document.getElementById(id);
+const button = target.nextElementSibling;
 
+// Init clipboard -- for more info, please read the offical documentation: https://clipboardjs.com/
+clipboard = new ClipboardJS(button, {
+    target: target,
+    text: function () {
+        return target.innerHTML;
+    }
+});
+
+// Success action handler
+clipboard.on('success', function (e) {
+    var checkIcon = button.querySelector('.ki-check');
+    var copyIcon = button.querySelector('.ki-copy');
+
+    // Exit check icon when already showing
+    if (checkIcon) {
+        return;
+    }
+
+    // Create check icon
+    checkIcon = document.createElement('i');
+    checkIcon.classList.add('ki-duotone');
+    checkIcon.classList.add('ki-check');
+    checkIcon.classList.add('fs-2x');
+
+    // Append check icon
+    button.appendChild(checkIcon);
+
+    // Highlight target
+    const classes = ['text-success', 'fw-boldest'];
+    target.classList.add(...classes);
+
+    // Highlight button
+    button.classList.add('btn-success');
+
+    // Hide copy icon
+    copyIcon.classList.add('d-none');
+
+    // Revert button label after 3 seconds
+    setTimeout(function () {
+        // Remove check icon
+        copyIcon.classList.remove('d-none');
+
+        // Revert icon
+        button.removeChild(checkIcon);
+
+        // Remove target highlight
+        target.classList.remove(...classes);
+
+        // Remove button highlight
+        button.classList.remove('btn-success');
+    }, 3000)
+});
+}
+myclipboard('kt_clipboard_4')
+</script>
+@endsection
 </x-base-layout>

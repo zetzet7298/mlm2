@@ -117,12 +117,12 @@
                     <div class="row mb-6">
                         <!--begin::Label-->
                         <label class="col-lg-4 col-form-label fw-bold fs-6">
-                            <span class="required">Description</span>
+                            <span class="required">Contact Phone Number</span>
                         </label>
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col-lg-8 fv-row fv-plugins-icon-container">
-                            <textarea rows='5' required name="description" placeholder="Enter description" class="form-control form-control-lg form-control-solid"></textarea>
+                            <textarea rows='1' required name="description" placeholder="Enter description" class="form-control form-control-lg form-control-solid"></textarea>
                         <div class="fv-plugins-message-container invalid-feedback"></div></div>
                         <!--end::Col-->
                     </div>
@@ -165,10 +165,27 @@
                     </div>
                     <!--end::Input group-->
                 </div>
+                            <!--begin::Alert-->
+<div class="alert-danger">
+    <!--begin::Icon-->
+    {{-- <span class="svg-icon svg-icon-2hx svg-icon-primary me-3">...</span> --}}
+    <!--end::Icon-->
+
+    <!--begin::Wrapper-->
+    <div class="d-flex flex-column">
+        <!--begin::Title-->
+        <!--end::Title-->
+        <!--begin::Content-->
+        <div class="px-4 fs-6 fw-bold">Note: When you post a product, $1 will be deducted from your account</div>
+        <!--end::Content-->
+    </div>
+    <!--end::Wrapper-->
+</div>
+<!--end::Alert-->
                 <!--end::Card body-->
                 <!--begin::Actions-->
                 <div class="card-footer d-flex justify-content-end py-6 px-9">
-                    <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Save Changes</button>
+                    <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Post Product</button>
                 </div>
                 <!--end::Actions-->
             <input type="hidden"><div></div></form>

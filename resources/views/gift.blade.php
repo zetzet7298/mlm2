@@ -4,25 +4,25 @@
 <div class="container card">
     <div class="row">
         <div class="col-md-12">
-            <div class="alert alert-primary">
+            <!--begin::Alert-->
+            <div class="alert-primary">
                 <!--begin::Icon-->
                 {{-- <span class="svg-icon svg-icon-2hx svg-icon-primary me-3">...</span> --}}
                 <!--end::Icon-->
-            
+
                 <!--begin::Wrapper-->
                 <div class="d-flex flex-column">
                     <!--begin::Title-->
                     <!--end::Title-->
                     <!--begin::Content-->
-                    <div>You receive a gift of 400 OGB (equivalent to $40) and lock it until 1/6/2014.</div>
-
+                    <div class="px-4 fs-6 fw-bold">You receive a gift of 400 OGB (equivalent to $40) and lock it until 6/6/2024.</div>
                     <!--end::Content-->
                 </div>
                 <!--end::Wrapper-->
             </div>
+            <!--end::Alert-->
             <div class="symbol symbol-200px">
                 <img src="{{ asset('images/gift.jpg') }}">
-
             </div>
         </div>
     </div>

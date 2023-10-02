@@ -69,6 +69,11 @@ class ProductController extends Controller
                 }
             }
             $product->save();
+            $new_coin = auth()->user()->coin - 1;
+            auth()->user()->update([
+                'coin' =>  $new_coin,
+            ]);
+
             DB::commit();
             return redirect()->back()->with("success", "Created!");
         }catch(\Exception $e){
@@ -109,6 +114,10 @@ class ProductController extends Controller
                 }
             }
             $product->save();
+            $new_coin = auth()->user()->coin - 1;
+            auth()->user()->update([
+                'coin' =>  $new_coin,
+            ]);
             DB::commit();
             return redirect()->back()->with("success", "Success!");
         }catch(\Exception $e){

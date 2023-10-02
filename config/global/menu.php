@@ -495,7 +495,7 @@ return array(
                     ),
                     array(
             'role' => 'admin|member',
-                        'title'  => 'Add Product',
+                        'title'  => 'Post Product',
                         'path'   => 'management/products/create',
                         'bullet' => '<span class="bullet bullet-dot"></span>',
                     ),

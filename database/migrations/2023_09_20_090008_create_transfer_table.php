@@ -20,6 +20,7 @@ class CreateTransferTable extends Migration
             $table->unsignedBigInteger('sender_id')->nullable();
             $table->unsignedBigInteger('receiver_id')->nullable();
             $table->double('coin');
+            $table->string('txid', 128)->nullable();
             $table->string('content', 255)->nullable();
             $table->foreign('sender_id')->references('id')->on('users');
             $table->foreign('receiver_id')->references('id')->on('users');

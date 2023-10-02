@@ -18,10 +18,12 @@ class PagesController extends Controller
         $view = theme()->getOption('page', 'view');
         // Check if the page view file exist
         if ($view == 'index'){
-            $products = Product::active()->orderBy('created_at')->orderBy('featured', 'desc')->take(3)->get();
-            $hotProducts = Product::inRandomOrder()->take(6)->get();
+            $products = Product::active()->orderBy('created_at', 'desc')
+            // ->orderBy('featured', 'desc')
+            ->take(3)->get();
+            $hotProducts = Product::active()->orderBy('featured', 'desc')->inRandomOrder()->take(6)->get();
             // dd($hotProducts);
-            return view('pages.'.$view)->with([
+            return view('pages.index')->with([
                 'products'=> $products,
                 'hotProducts' => $hotProducts
             ]);

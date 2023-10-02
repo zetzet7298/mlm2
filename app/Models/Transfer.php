@@ -18,6 +18,7 @@ class Transfer extends Model
      */
     protected $fillable = [
         'id',
+        'txid',
         'sender_id',
         'receiver_id',
         'coin',

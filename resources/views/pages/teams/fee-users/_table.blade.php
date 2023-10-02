@@ -1,5 +1,7 @@
 <!--begin::Table-->
-{{ $dataTable->table() }}
+<div class="scroll">
+    {{ $dataTable->table() }}
+    </div>
 <!--end::Table-->
 
 {{-- Inject Scripts --}}

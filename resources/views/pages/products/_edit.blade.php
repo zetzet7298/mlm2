@@ -117,7 +117,7 @@
                     <div class="row mb-6">
                         <!--begin::Label-->
                         <label class="col-lg-4 col-form-label fw-bold fs-6">
-                            <span class="required">Description</span>
+                            <span class="required">Contact Phone Number</span>
                         </label>
                         <!--end::Label-->
                         <!--begin::Col-->
@@ -154,11 +154,11 @@
                         <label class="col-lg-4 col-form-label fw-bold fs-6">Featured</label>
                         <!--begin::Label-->
                         <!--begin::Label-->
-                        <div class="col-lg-8 d-flex align-items-center">
+                        <div class="col-lg-8 d-flex align-items-center" >
                             <div class="form-check form-check-solid form-switch fv-row">
                                 <input class="form-check-input w-45px h-30px" type="checkbox" id="featured" name="featured" 
                                 @if($product->featured == true)
-                                checked="checked"
+                            checked="checked"
                                 @endif
                                 >
                                 <label class="form-check-label" for="allowmarketing"></label>
@@ -169,9 +169,26 @@
                     <!--end::Input group-->
                 </div>
                 <!--end::Card body-->
+                                            <!--begin::Alert-->
+<div class="alert-danger">
+    <!--begin::Icon-->
+    {{-- <span class="svg-icon svg-icon-2hx svg-icon-primary me-3">...</span> --}}
+    <!--end::Icon-->
+
+    <!--begin::Wrapper-->
+    <div class="d-flex flex-column">
+        <!--begin::Title-->
+        <!--end::Title-->
+        <!--begin::Content-->
+        <div class="px-4 fs-6 fw-bold">Note: When you update a product, $1 will be deducted from your account</div>
+        <!--end::Content-->
+    </div>
+    <!--end::Wrapper-->
+</div>
+<!--end::Alert-->
                 <!--begin::Actions-->
                 <div class="card-footer d-flex justify-content-end py-6 px-9">
-                    <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Save Changes</button>
+                    <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Update</button>
                 </div>
                 <!--end::Actions-->
             <input type="hidden"><div></div></form>
