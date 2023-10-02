@@ -37,8 +37,8 @@
                 <span class="fs-6">{{ number_format(auth()->user()->coin) }}$</span>
                 <!--end::Select-->
             </div>
-            <!--begin::Alert-->
-<div class="alert alert-primary">
+<!--begin::Alert-->
+<div class="alert-danger">
     <!--begin::Icon-->
     {{-- <span class="svg-icon svg-icon-2hx svg-icon-primary me-3">...</span> --}}
     <!--end::Icon-->
@@ -48,8 +48,12 @@
         <!--begin::Title-->
         <!--end::Title-->
         <!--begin::Content-->
-        <div>A minimum account balance of $100 is allowed to withdraw</div>
-        <span>Withdraw USDT (TRC20 network) .Withdraw USDT to crypto address</span>
+        <div class="px-4 fs-6 fw-bold">
+            A minimum account balance of $100 is allowed to withdraw
+        </div>
+        <div class="px-4 fs-6 fw-bold">
+            Withdraw USDT (TRC20 network) .Withdraw USDT to crypto address
+        </div>
         <!--end::Content-->
     </div>
     <!--end::Wrapper-->
