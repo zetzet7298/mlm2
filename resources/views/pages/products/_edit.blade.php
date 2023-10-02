@@ -117,7 +117,7 @@
                     <div class="row mb-6">
                         <!--begin::Label-->
                         <label class="col-lg-4 col-form-label fw-bold fs-6">
-                            <span class="required">Contact Phone Number</span>
+                            <span class="required">Contact person and phone number</span>
                         </label>
                         <!--end::Label-->
                         <!--begin::Col-->
