@@ -108,7 +108,7 @@ class WalletController extends Controller
         // if(empty(User::where(['username' => $request->username])->first()) || $request->username == auth()->user()->username){
         //     return redirect()->back()->with("error", "Receiver Not Exists!");
         // }
-        if(auth()->user()->coin < 100){
+        if(auth()->user()->coin < 100 || $request->coin < 100){
             return redirect()->back()->with("error", "A minimum account balance of $100 is allowed to withdraw!");
         }
         if($request->coin > auth()->user()->coin){
