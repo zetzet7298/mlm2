@@ -443,7 +443,7 @@ class User extends \TCG\Voyager\Models\User
             $new_type = self::getAccountType($user['type'], $totalLeft, $totalRight);
             // dump($totalLeft, $totalRight, $new_type);
             // User::where(['id' => $user['id']])->update(['type' => $new_type]);
-            $content = "branch bonus commissions";
+            $content = "quick bonus commissions";
             Income::create([
                 'user_id'        => $user['id'],
                 'coin'             => AccountConstant::INDIRECT_COMISSION,

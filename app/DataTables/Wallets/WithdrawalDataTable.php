@@ -32,6 +32,7 @@ class WithdrawalDataTable extends DataTable
             ->editColumn('user_id', function (Withdrawal $model) {
                 return $model->user ? $model->user->username : '';
             })
+
             ->addColumn('action', function (Withdrawal $model) {
                 if(!$model->is_received){
                     return view('pages.wallets.withdrawal._action-menu', compact('model'));

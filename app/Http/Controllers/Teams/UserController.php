@@ -31,7 +31,12 @@ class UserController extends Controller
         DB::beginTransaction();
         try {
             User::where('id', $id)->update(['state' => AccountConstant::USER_STATE_PAID, 'type' => AccountConstant::TYPE_USER_MEMBER]);
-            User::handleUpgrade($id, $user->direct_user_id);
+            // User::handleUpgrade($id, $user->direct_user_id);
+            // auth()->user()->update([
+            //     'direct_user_id' => $direct_user->id,
+            //     'indirect_user_id' => $indirect_user->id,
+            //     'state'             => AccountConstant::USER_STATE_PROCESSING
+            // ]);
             DB::commit();
             return redirect()->back()->with("success", "Success!");
         }catch(\Exception $e){

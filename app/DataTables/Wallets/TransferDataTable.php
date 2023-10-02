@@ -22,11 +22,17 @@ class TransferDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+            // ->editColumn('sender_id', function (Transfer $model) {
+            //     return $model->sender ? $model->sender->first_name . ' '. $model->sender->last_name : '';
+            // })
+            // ->editColumn('receiver_id', function (Transfer $model) {
+            //     return $model->receiver ? $model->receiver->first_name . ' '. $model->receiver->last_name : '';
+            // })
             ->editColumn('sender_id', function (Transfer $model) {
-                return $model->sender ? $model->sender->first_name . ' '. $model->sender->last_name : '';
+                return $model->sender ? $model->sender->username: '';
             })
             ->editColumn('receiver_id', function (Transfer $model) {
-                return $model->receiver ? $model->receiver->first_name . ' '. $model->receiver->last_name : '';
+                return $model->receiver ? $model->receiver->username: '';
             })
             ->editColumn('created_at', function (Transfer $model) {
                 return date($model->created_at->format('d-m-Y H:i:s'));

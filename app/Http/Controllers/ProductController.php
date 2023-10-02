@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Product;
 use App\DataTables\ProductDataTable;
 use App\Models\User;
+use App\Models\Withdrawal;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -74,6 +75,13 @@ class ProductController extends Controller
                 'coin' =>  $new_coin,
             ]);
 
+            Withdrawal::create([
+                'user_id'        => auth()->user()->id,
+                'address'        => '',
+                'coin'             => 1,
+                'content'             => 'Post Product',
+            ]);
+
             DB::commit();
             return redirect()->back()->with("success", "Created!");
         }catch(\Exception $e){
@@ -118,6 +126,14 @@ class ProductController extends Controller
             auth()->user()->update([
                 'coin' =>  $new_coin,
             ]);
+
+            Withdrawal::create([
+                'user_id'        => auth()->user()->id,
+                'address'        => '',
+                'coin'             => 1,
+                'content'             => 'Update Product',
+            ]);
+
             DB::commit();
             return redirect()->back()->with("success", "Success!");
         }catch(\Exception $e){

@@ -27,7 +27,7 @@
             @if(auth()->user()->type != AccountConstant::TYPE_USER_FREE)
             @elseif(auth()->user()->state == AccountConstant::USER_STATE_PROCESSING)
             <div class="fs-5 badge badge-light-success mb-4">
-                Your account is waiting for confirmation to become a member
+                Waiting for transfer
             </div>
             @else
             <form action="{{ route('wallet.upgrade') }}" method="post">
@@ -41,6 +41,7 @@
                 </div>
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                 <!--end::Input group-->
+                @if(auth()->user()->coin >= AccountConstant::COIN_NEED_UPGRADE)
                 <!--begin::Input group-->
                 <div class="fv-row mb-7">
                     <label class="form-label fw-bolder text-gray-700 fs-6">{{ __('Direct Refferer Code (Username)') }}</label>
@@ -60,12 +61,19 @@
                     <input class="form-control form-control-lg form-control-solid" required type="text"
                         name="indirect_user_id" autocomplete="off" value="" />
                 </div>
+                @endif
                 <!--end::Input group-->
-                @if(auth()->user()->coin < AccountConstant::COIN_NEED_UPGRADE) <input type="hidden" value="0"
-                    name="enough"></input>
-                    <div class="fs-5 badge badge-light-success mb-4">
+                @if(auth()->user()->coin < AccountConstant::COIN_NEED_UPGRADE) 
+                <input type="hidden" value="0"
+                    name="enough"/>
+                    <div class="row">
+                        <div class="col-12">
+                    <span class="fs-5 badge badge-light-success mb-4">
                         You do not have enough money to upgrade, please choose a payment method
+                    </span>
+                        </div>
                     </div>
+
                     <!--begin::Input group-->
                     <div class="mb-10">
                         <!--begin::Label-->
