@@ -34,12 +34,12 @@ class UserDataTable extends DataTable
             ->editColumn('created_at', function (User $model) {
                 return date($model->created_at->format('d-m-Y H:i:s'));
             })
-            ->addColumn('action', function (User $model) {
-                if($model->state == AccountConstant::USER_STATE_PROCESSING){
-                    return view('pages.teams.users._action-menu', compact('model'));
-                }
-                return '';
-            })
+            // ->addColumn('action', function (User $model) {
+            //     if($model->state == AccountConstant::USER_STATE_PROCESSING){
+            //         return view('pages.teams.users._action-menu', compact('model'));
+            //     }
+            //     return '';
+            // })
             ;
     }
 
@@ -93,11 +93,11 @@ class UserDataTable extends DataTable
             Column::make('email'),
             Column::make('coin'),
             Column::make('created_at'),
-            Column::computed('action')
-            ->exportable(false)
-            ->printable(false)
-            ->width(170)
-            ->addClass('text-center'),
+            // Column::computed('action')
+            // ->exportable(false)
+            // ->printable(false)
+            // ->width(170)
+            // ->addClass('text-center'),
         ];
     }
 

@@ -94,11 +94,6 @@ class WalletController extends Controller
                 'is_received' => true
             ]);
 
-            $admin_new_coin = User::where('username', 'admin')->first();
-
-            User::where('username', 'admin')->update([
-                'coin' =>  $admin_new_coin + floatval($find->coin),
-            ]);
             DB::commit();
             return redirect()->back()->with("success", "Success!");
             // all good
@@ -203,16 +198,30 @@ class WalletController extends Controller
                     // 'state'             => AccountConstant::USER_STATE_PAID
                 ]);
                 User::handleUpgrade(auth()->user()->id, $direct_user->id);
+                $admin = User::where('username', 'admin')->first();
+
+                User::where('username', 'admin')->update([
+                    'coin' =>  AccountConstant::COIN_NEED_UPGRADE + floatval($admin->coin),
+                ]);
+                Transfer::create([
+                    // 'txid'        => $request->txid,
+                    'sender_id'        => auth()->user()->id,
+                    'receiver_id'         => $admin->id,
+                    'coin'             => AccountConstant::COIN_NEED_UPGRADE,
+                    'content'             => 'Fee Upgrade Account',
+                ]);
             }else{
                 $admin = User::getAdmin();
                 Transfer::create([
                     'txid'        => $request->txid,
-                    'sender_id'        => $admin->id,
-                    'receiver_id'         => auth()->user()->id,
-                    'coin'             => AccountConstant::ADMIN_TRANSFER,
+                    'sender_id'        => auth()->user()->id,
+                    'receiver_id'         => $admin->id,
+                    'coin'             => 0,
                     'content'             => 'Send Request To Tranfer',
                 ]);
-
+                // auth()->user()->update([
+                //     'state'             => AccountConstant::USER_STATE_PROCESSING
+                // ]);
             }
 
             // $users = User::where('indirect_user_id', '<>', null)

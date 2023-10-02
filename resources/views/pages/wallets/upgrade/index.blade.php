@@ -8,7 +8,7 @@
         <!--begin::Card body-->
         <div class="card-body p-10">
             <!--begin::Input group-->
-            <div class="mb-10">
+            <div class="mb-5">
                 <!--begin::Label-->
                 <label class="form-label fw-bolder fs-6 text-gray-700 me-5">Account Balance</label>
                 <!--end::Label-->
@@ -16,7 +16,7 @@
                 <span class="fs-6">{{ number_format(auth()->user()->coin) }}$</span>
                 <!--end::Select-->
             </div>
-            <div class="mb-10">
+            <div class="mb-5">
                 <!--begin::Label-->
                 <label class="form-label fw-bolder fs-6 text-gray-700 me-12">Account Type</label>
                 <!--end::Label-->
@@ -26,12 +26,12 @@
             </div>
             @if(auth()->user()->type != AccountConstant::TYPE_USER_FREE)
             @elseif(auth()->user()->state == AccountConstant::USER_STATE_PROCESSING)
-            <div class="fs-5 badge badge-light-success mb-4">
+            <div class="fs-5 alert-success mb-4">
                 Waiting for transfer
             </div>
             @else
             <form action="{{ route('wallet.upgrade') }}" method="post">
-                <div class="mb-10">
+                <div class="mb-5">
                     <!--begin::Label-->
                     <label class="form-label fw-bolder fs-6 text-gray-700 me-15">Upgrade Fee</label>
                     <!--end::Label-->
@@ -66,16 +66,13 @@
                 @if(auth()->user()->coin < AccountConstant::COIN_NEED_UPGRADE) 
                 <input type="hidden" value="0"
                     name="enough"/>
-                    <div class="row">
-                        <div class="col-12">
-                    <span class="fs-5 badge badge-light-success mb-4">
+
+                    <div class="fs-5 alert-danger mb-5">
                         You do not have enough money to upgrade, please choose a payment method
-                    </span>
-                        </div>
                     </div>
 
                     <!--begin::Input group-->
-                    <div class="mb-10">
+                    <div class="mb-5">
                         <!--begin::Label-->
                         <label class="form-label fw-bolder fs-6 text-gray-700">Payment Account</label>
                         <!--end::Label-->
@@ -85,7 +82,7 @@
                     </div>
                     <!--end::Input group-->
                     <!--begin::Input group-->
-                    <div class="mb-10">
+                    <div class="mb-5">
                         <!--begin::Label-->
                         <label class="form-label fw-bolder fs-6 text-gray-700">Receiver</label>
                         <!--end::Label-->
@@ -95,7 +92,7 @@
                     </div>
                     <!--end::Input group-->
                     <!--begin::Input group-->
-                    <div class="mb-10">
+                    <div class="mb-5">
                         <!--begin::Label-->
                         <label class="form-label fw-bolder fs-6 text-gray-700">Currency</label>
                         <!--end::Label-->
@@ -109,7 +106,7 @@
                     </div>
                     <!--end::Input group-->
                     <!--begin::Input group-->
-                    <div class="mb-10">
+                    <div class="mb-5">
                         <!--begin::Label-->
                         <div class="form-label fw-bolder fs-6 text-gray-700">Please scan the QR code below to
                             transfer</div>
@@ -156,7 +153,7 @@
                     </div>
                     <!--end::Input group-->
                     <!--begin::Input group-->
-                    <div class="mb-10">
+                    <div class="mb-5">
                         <!--begin::Label-->
                         <label class="form-label fw-bolder fs-6 text-gray-700">TxID</label>
                         <!--end::Label-->
