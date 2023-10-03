@@ -108,7 +108,7 @@
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col-lg-8 fv-row fv-plugins-icon-container">
-                            <textarea rows='3' required name="details" placeholder="Enter detail content" class="form-control form-control-lg form-control-solid"></textarea>
+                            <textarea rows='3' required name="description" placeholder="Enter detail content" class="form-control form-control-lg form-control-solid"></textarea>
                         <div class="fv-plugins-message-container invalid-feedback"></div></div>
                         <!--end::Col-->
                     </div>
@@ -122,7 +122,7 @@
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col-lg-8 fv-row fv-plugins-icon-container">
-                            <textarea rows='1' required name="description" placeholder="Enter description" class="form-control form-control-lg form-control-solid"></textarea>
+                            <textarea rows='1' required name="details" placeholder="Enter description" class="form-control form-control-lg form-control-solid"></textarea>
                         <div class="fv-plugins-message-container invalid-feedback"></div></div>
                         <!--end::Col-->
                     </div>
