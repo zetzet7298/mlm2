@@ -186,12 +186,12 @@ class User extends \TCG\Voyager\Models\User
     //     }
     // }
 
-    public static function generate_system_tree($parent, &$new_data, $direct_user_id = 0, $level = 0, &$total = 0, &$totalLeft = 0, &$totalRight = 0)
+    public static function generate_system_tree($parent, &$new_data, $direct_user_id = 0, $level = 1, &$total = 0, &$totalLeft = 0, &$totalRight = 0)
     {
         $avatar = $parent->avatar ? asset($parent->avatar) :  asset(theme()->getMediaUrlPath() . 'avatars/blank.png');
         # code...
         $full_name = $parent->first_name . ' ' . $parent->last_name;
-        array_push($new_data, "<li><a class='view_detail cursor-pointer' data-id='{$parent->id}' data-full_name='{$full_name}'>
+        array_push($new_data, "<li><a class='view_detail cursor-pointer' data-id='{$parent->id}' data-full_name='{$full_name}' data-level='{$level}'>
         <div class='symbol symbol-20px symbol-sm-20px'>
                                                                 <img src='{$avatar}' alt=''>
 

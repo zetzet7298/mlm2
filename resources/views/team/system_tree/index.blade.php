@@ -63,7 +63,7 @@
            })
            $(document).on("click", ".view_detail", function () {
              let id = $(this).data("id");
-            //  let level = $(this).data("level");
+             let level = $(this).data("level");
              let full_name = $(this).data("full_name");
             //  $("#edit_form").find('input[name="name"]').val(item.name);
             //  $("#edit_form").find('textarea[name="desc"]').val(item.desc);
@@ -71,7 +71,8 @@
             $.ajax({
               url: "/api/user/" + id, success: function(result){
                 $('#modal_view_detail #username').html(result.username)
-                $('#modal_view_detail #level').html('F' + result.level)
+                // $('#modal_view_detail #level').html('F' + result.level)
+                $('#modal_view_detail #level').html('F' + level)
                 // $('#modal_view_detail #direct_user').html(result.direct_user_name)
                 // $('#modal_view_detail #indirect_user').html(result.indirect_user_name)
                 // $('#modal_view_detail #direct_total').html(result.direct_total + '$')

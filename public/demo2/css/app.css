@@ -14075,6 +14075,14 @@ a.custom-card:hover {
   border: 1px solid #222;
   padding: 0.5em;
 }
+.index-ul{
+  /* display: inline; */
+  /* min-width: 100%;*/
+  height: 50px !important;
+  width: 3500px;
+  /* overflow: scroll;  */
+  /* overflow-x: scroll;  */
+}
 .index-li{
   display: inline;
   float: left;

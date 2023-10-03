@@ -12,11 +12,16 @@
                     <h4 class="filter-header">
                         By Category
                     </h4>
+                    <div>
+                        <div class="scroll-x">
                     <ul class="filter-ul index-ul">
                         @foreach ($categories as $category)
                             <li class="index-li"><a class="text-center text-primary fs-6 fw-bold" href="{{ route('shop.index', ['category' => $category->slug]) }}">{{ $category->name }}</a></li>
                         @endforeach
                     </ul>
+                </div>
+                    </div>
+
                     {{-- <h4 class="filter-header">
                         By Tag
                     </h4>

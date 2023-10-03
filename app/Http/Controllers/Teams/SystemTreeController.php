@@ -139,7 +139,7 @@ class SystemTreeController extends Controller
         // }
         $tree = [];
 
-        User::generate_system_tree($user, $tree, null, 0, $total);
+        User::generate_system_tree($user, $tree, null, 1, $total);
         // $total = User::calc_total($user);
         // dump($total);
         $tree = implode('', $tree);
