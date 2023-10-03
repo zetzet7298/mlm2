@@ -84,11 +84,6 @@ class WalletController extends Controller
         }
         DB::beginTransaction();
         try {     
-            $user = User::find($find->user_id);
-            $new_coin = $user->coin - floatval($find->coin);
-            User::where('id', $find->user_id)->update([
-                'coin' =>  $new_coin,
-            ]);
 
             Withdrawal::where('id', $id)->update([
                 'is_received' => true
@@ -120,10 +115,10 @@ class WalletController extends Controller
         }
         DB::beginTransaction();
         try {     
-            // $new_coin = auth()->user()->coin - floatval($request->coin);
-            // auth()->user()->update([
-            //     'coin' =>  $new_coin,
-            // ]);
+            $new_coin = auth()->user()->coin - floatval($request->coin);
+            auth()->user()->update([
+                'coin' =>  $new_coin,
+            ]);
 
             Withdrawal::create([
                 'user_id'        => auth()->user()->id,
@@ -131,7 +126,11 @@ class WalletController extends Controller
                 'coin'             => floatval($request->coin),
                 'content'             => 'Cashwithdrawal',
             ]);
-
+            // $user = User::find($find->user_id);
+            // $new_coin = $user->coin - floatval($find->coin);
+            // User::where('id', $find->user_id)->update([
+            //     'coin' =>  $new_coin,
+            // ]);
             DB::commit();
             return redirect()->back()->with("success", "Success!");
             // all good
