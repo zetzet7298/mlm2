@@ -7,18 +7,23 @@
 
 <!--begin::Toolbar wrapper-->
 <div class="topbar d-flex align-items-stretch flex-shrink-0">
+    @if(!empty(auth()->user()))
     <!--begin::User-->
     <div class="d-flex align-items-center me-n3 {{ $toolbarButtonMarginClass }}" id="kt_header_user_menu_toggle">
         <!--begin::Menu wrapper-->
         <div class="btn btn-icon btn-active-light-primary {{ $toolbarButtonHeightClass }}" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-            @if(!empty(auth()->user()))
             <img class="h-25px w-25px rounded" src="{{ auth()->user()->avatar_url }}" alt="avatar"/>
-            @endif
         </div>
     {{ theme()->getView('partials/topbar/_user-menu') }}
     <!--end::Menu wrapper-->
     </div>
     <!--end::User -->
+    @else
+    <div>
+        <a href="/register" class="btn btn-light-primary fs-6 fw-bold me-5">Register</a>
+        <a href="/login" class="btn btn-light-info fs-6 fw-bold">Login</a>
+    </div>
+    @endif
 
     <!--begin::Aside mobile toggle-->
     @if (theme()->getOption('layout', 'aside/display') === true)

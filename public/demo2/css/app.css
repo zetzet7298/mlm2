@@ -14075,6 +14075,11 @@ a.custom-card:hover {
   border: 1px solid #222;
   padding: 0.5em;
 }
+.index-li{
+  display: inline;
+  float: left;
+  background-color: #dee2e6;
+}
 
 .filter-ul {
   padding: 0;

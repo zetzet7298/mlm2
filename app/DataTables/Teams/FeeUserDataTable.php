@@ -57,9 +57,14 @@ class FeeUserDataTable extends DataTable
      */
     public function query(User $model)
     {
-        return $model->with(['direct_user', 'indirect_user'])
-        ->where('type' ,'<>', AccountConstant::TYPE_USER_FREE)
-        ->orderBy('created_at', 'desc')->newQuery();
+        if(User::isAdmin()){
+            return $model->with(['direct_user', 'indirect_user'])
+            ->where('type' ,'<>', AccountConstant::TYPE_USER_FREE)
+            ->orderBy('created_at', 'desc')->newQuery();
+        }else{
+            return $model->where(['type' => 'zxczxc'])->newQuery();
+        }
+
     }
 
     /**

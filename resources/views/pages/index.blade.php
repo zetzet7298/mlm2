@@ -6,7 +6,28 @@
 <!-- end hero section -->
 <!-- start page content -->
 <div class="container">
-    <h2 class="header text-center">Featured Products</h2>
+                <!-- start filter section -->
+                <div class="row mb-1">
+                <div class="col-md-12" style="">
+                    <h4 class="filter-header">
+                        By Category
+                    </h4>
+                    <ul class="filter-ul index-ul">
+                        @foreach ($categories as $category)
+                            <li class="index-li"><a class="text-center text-primary fs-6 fw-bold" href="{{ route('shop.index', ['category' => $category->slug]) }}">{{ $category->name }}</a></li>
+                        @endforeach
+                    </ul>
+                    {{-- <h4 class="filter-header">
+                        By Tag
+                    </h4>
+                    <ul class="filter-ul">
+                        @foreach ($tags as $tag)
+                            <li><a class="text-center {{ $tag->name == $tagName ? 'active-cat' : '' }}" href="{{ route('shop.index', ['tag' => $tag->slug]) }}">{{ $tag->name }}</a></li>
+                        @endforeach
+                    </ul> --}}
+                </div>
+            </div>
+    <h2 class="fs-2 fw-bold text-center text-dark">Featured Products</h2>
     <!-- start products row -->
     <div class="row">
         @foreach ($products as $product)

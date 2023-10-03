@@ -9,8 +9,6 @@ use App\Tag;
 
 class ShopController extends Controller
 {
-    
-
     public function index() {
         $pagination = 12;
         if(request()->category) {
@@ -25,12 +23,15 @@ class ShopController extends Controller
             $products = Product::where('featured', true);
             $categoryName = 'Featured';
         }
+        $products = $products->orderBy('created_at', 'desc');
         if(request()->sort == 'low_high') {
             $products = $products->orderBy('price')->paginate($pagination);
         } else if(request()->sort == 'high_low') {
             $products = $products->orderBy('price', 'desc')->paginate($pagination);
         } else {
-            $products = $products->inRandomOrder()->paginate($pagination);
+            $products = $products
+            // ->inRandomOrder()
+            ->paginate($pagination);
         }
         $categories = Category::all();
         $tags = Tag::all();

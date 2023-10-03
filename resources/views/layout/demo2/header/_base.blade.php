@@ -24,7 +24,7 @@ data-kt-sticky="true"
 
         <!--begin::Header Logo-->
         <div class="header-logo me-5 me-md-10 flex-grow-1 flex-lg-grow-0">
-            <a href="{{ theme()->getPageUrl('index') }}">
+            <a href="{{ theme()->getPageUrl('/') }}">
                 <img alt="Logo" src="{{ asset(theme()->getMediaUrlPath() . 'logos/logo-4.png') }}" class="logo-default h-25px"/>
                 <img alt="Logo" src="{{ asset(theme()->getMediaUrlPath() . 'logos/logo-5.png') }}" class="logo-sticky h-25px"/>
             </a>

@@ -4,27 +4,29 @@
 <div class="container">
         <div class="row">
             <!-- start filter section -->
-            <div class="col-md-2" style="margin-top:1em">
-                <h4 class="filter-header">
-                    By Category
-                </h4>
-                <ul class="filter-ul">
-                    @foreach ($categories as $category)
-                        <li><a class="text-center {{ $category->name == $categoryName ? 'active-cat' : '' }}" href="{{ route('shop.index', ['category' => $category->slug]) }}">{{ $category->name }}</a></li>
-                    @endforeach
-                </ul>
-                <h4 class="filter-header">
-                    By Tag
-                </h4>
-                <ul class="filter-ul">
-                    @foreach ($tags as $tag)
-                        <li><a class="text-center {{ $tag->name == $tagName ? 'active-cat' : '' }}" href="{{ route('shop.index', ['tag' => $tag->slug]) }}">{{ $tag->name }}</a></li>
-                    @endforeach
-                </ul>
+            <div class="row mb-1">
+                <div class="col-md-12" style="">
+                    <h4 class="filter-header">
+                        By Category
+                    </h4>
+                    <ul class="filter-ul index-ul">
+                        @foreach ($categories as $category)
+                            <li class="index-li"><a class="text-center text-primary fs-6 fw-bold" href="{{ route('shop.index', ['category' => $category->slug]) }}">{{ $category->name }}</a></li>
+                        @endforeach
+                    </ul>
+                    {{-- <h4 class="filter-header">
+                        By Tag
+                    </h4>
+                    <ul class="filter-ul">
+                        @foreach ($tags as $tag)
+                            <li><a class="text-center {{ $tag->name == $tagName ? 'active-cat' : '' }}" href="{{ route('shop.index', ['tag' => $tag->slug]) }}">{{ $tag->name }}</a></li>
+                        @endforeach
+                    </ul> --}}
+                </div>
             </div>
             <!-- end filter section -->
             <!-- start products section -->
-            <div class="col-md-8 offset-md-1">
+            <div class="col-md-12">
                 <div class="head row">
                     <div class="col-md-6">
                         <h2 class="content-head">

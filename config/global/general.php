@@ -2,10 +2,10 @@
 return array(
     // Product
     'product' => array(
-        'name'        => 'Metronic',
-        'description' => 'Metronic - #1 Selling Bootstrap 5 HTML Multi-demo Admin Dashboard Theme',
-        'preview'     => 'https://preview.keenthemes.com/metronic8',
-        'purchase'    => 'https://1.envato.market/EA4JP',
+        'name'        => 'Online Global Buy',
+        'description' => 'Online Global Buy - #1 Online Buy',
+        'preview'     => '',
+        'purchase'    => '',
         'license'     => 'For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.',
         'tooltips'    => array(
             "docs-and-components" => '200+ in-house components and 3rd-party plugins',
@@ -91,9 +91,9 @@ return array(
 
     // Meta
     'meta'    => array(
-        'title'       => 'Metronic Bootstrap 5 Theme',
-        'description' => 'Metronic admin dashboard live demo. Check out all the features of the admin panel. A large number of settings, additional services and widgets.',
-        'keywords'    => 'Metronic, bootstrap, bootstrap 5, Angular 11, VueJs, React, Laravel, admin themes, web design, figma, web development, ree admin themes, bootstrap admin, bootstrap dashboard',
+        'title'       => 'Online Global Buy  Bootstrap 5 Theme',
+        'description' => 'Online Global Buy  admin dashboard live demo. Check out all the features of the admin panel. A large number of settings, additional services and widgets.',
+        'keywords'    => 'Online Global Buy , bootstrap, bootstrap 5, Angular 11, VueJs, React, Laravel, admin themes, web design, figma, web development, ree admin themes, bootstrap admin, bootstrap dashboard',
         'canonical'   => 'https://preview.keenthemes.com/metronic8',
     ),
 

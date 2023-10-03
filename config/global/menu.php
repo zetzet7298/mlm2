@@ -201,6 +201,7 @@ return array(
 
         // Account
         array(
+            'role' => 'admin|member',
             'title'      => 'My Account',
             'icon'       => array(
                 'svg'  => theme()->getSvgIcon("demo1/media/icons/duotune/communication/com006.svg", "svg-icon-2"),
@@ -214,16 +215,19 @@ return array(
                 'class' => 'menu-sub-accordion menu-active-bg',
                 'items' => array(
                     array(
+            'role' => 'admin|member',
                         'title'  => 'Overview',
                         'path'   => 'account/overview',
                         'bullet' => '<span class="bullet bullet-dot"></span>',
                     ),
                     array(
+            'role' => 'admin|member',
                         'title'  => 'Settings',
                         'path'   => 'account/settings',
                         'bullet' => '<span class="bullet bullet-dot"></span>',
                     ),
                     array(
+            'role' => 'admin|member',
                         'title'      => 'Security',
                         'path'       => 'account/security',
                         'bullet'     => '<span class="bullet bullet-dot"></span>',
@@ -335,6 +339,7 @@ return array(
 
         // Account
         array(
+            'role' => 'user',
             'title'      => 'My Account',
             'classes'    => array('item' => 'menu-lg-down-accordion me-lg-1', 'arrow' => 'd-lg-none'),
             'attributes' => array(
@@ -345,16 +350,19 @@ return array(
                 'class' => 'menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px',
                 'items' => array(
                     array(
+            'role' => 'user',
                         'title'  => 'Overview',
                         'path'   => 'account/overview',
                         'bullet' => '<span class="bullet bullet-dot"></span>',
                     ),
                     array(
+            'role' => 'user',
                         'title'  => 'Settings',
                         'path'   => 'account/settings',
                         'bullet' => '<span class="bullet bullet-dot"></span>',
                     ),
                     array(
+            'role' => 'user',
                         'title'      => 'Password Management',
                         'path'       => 'account/security',
                         'bullet'     => '<span class="bullet bullet-dot"></span>',
@@ -374,6 +382,7 @@ return array(
 
         // My Team
         array(
+            'role' => 'admin|member',
             'title'      => 'My Team',
             'classes'    => array('item' => 'menu-lg-down-accordion me-lg-1', 'arrow' => 'd-lg-none'),
             'attributes' => array(
@@ -384,18 +393,19 @@ return array(
                 'class' => 'menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px',
                 'items' => array(
                     array(
+            '           role' => 'admin|member',
                         'title'  => 'System Tree',
                         'path'   => 'team/system-tree',
                         'bullet' => '<span class="bullet bullet-dot"></span>',
                     ),
                     array(
-            'role' => 'admin',
+                        'role' => 'admin',
                         'title'  => 'Free Introduction List',
                         'path'   => 'team/users',
                         'bullet' => '<span class="bullet bullet-dot"></span>',
                     ),
                     array(
-            'role' => 'admin',
+                        'role' => 'admin',
                         'title'      => 'Fee Introduction List',
                         'path'       => 'team/fee-users',
                         'bullet'     => '<span class="bullet bullet-dot"></span>',
@@ -414,6 +424,7 @@ return array(
         ),
         // My Wallet
         array(
+            'role' => 'user',
             'title'      => 'My Wallet',
             'classes'    => array('item' => 'menu-lg-down-accordion me-lg-1', 'arrow' => 'd-lg-none'),
             'attributes' => array(
@@ -424,21 +435,25 @@ return array(
                 'class' => 'menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px',
                 'items' => array(
                     array(
+            'role' => 'admin|member',
                         'title'  => 'Upgrade',
                         'path'   => 'wallet/upgrade',
                         'bullet' => '<span class="bullet bullet-dot"></span>',
                     ),
                     array(
+            'role' => 'admin|member',
                         'title'  => 'Income History',
                         'path'   => 'wallet/income-history',
                         'bullet' => '<span class="bullet bullet-dot"></span>',
                     ),
                     array(
+            'role' => 'admin|member',
                         'title'      => 'Transfer',
                         'path'       => 'wallet/transfer-history',
                         'bullet'     => '<span class="bullet bullet-dot"></span>',
                     ),
                     array(
+            'role' => 'admin|member',
                         'title'      => 'Cash Withdrawal History',
                         'path'       => 'wallet/withdrawal-history',
                         'bullet'     => '<span class="bullet bullet-dot"></span>',
@@ -449,6 +464,7 @@ return array(
         ),
         // artificial intelligence
         array(
+            'role' => 'admin|member',
             'title'      => 'Artificial Intelligence',
             'path'   => '#',
             'attributes' => array(
@@ -463,6 +479,7 @@ return array(
         ),
         // gift
         array(
+            'role' => 'admin|member',
             'title'      => 'Gift',
             'path'       => 'gift',
             // 'attributes' => array(
@@ -515,11 +532,11 @@ return array(
             )
         ),
         // gift
-        array(
-            'role' => 'admin',
-            'title'      => 'Order',
-            'path'       => 'management/order',
-        ),
+        // array(
+        //     'role' => 'admin',
+        //     'title'      => 'Order',
+        //     'path'       => 'management/order',
+        // ),
         // // System
         // array(
         //     'title'      => 'System',

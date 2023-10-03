@@ -8,7 +8,7 @@
         <div class="text-center mb-10">
             <!--begin::Title-->
             <h1 class="text-dark mb-3">
-                {{ __('Sign In to Metronic') }}
+                {{ __('Sign In to Ongbuy ') }}
             </h1>
             <!--end::Title-->
 
@@ -58,11 +58,11 @@
                 <!--end::Label-->
 
                 <!--begin::Link-->
-                @if (Route::has('password.request'))
+                {{-- @if (Route::has('password.request'))
                     <a href="{{ theme()->getPageUrl('password.request') }}" class="link-primary fs-6 fw-bolder">
                         {{ __('Forgot Password ?') }}
                     </a>
-            @endif
+            @endif --}}
             <!--end::Link-->
             </div>
             <!--end::Wrapper-->

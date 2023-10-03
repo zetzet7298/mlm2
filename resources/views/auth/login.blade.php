@@ -8,7 +8,7 @@
         <div class="text-center mb-10">
             <!--begin::Title-->
             <h1 class="text-dark mb-3">
-                {{ __('Sign In to Metronic') }}
+                {{ __('Sign In to Ongbuy') }}
             </h1>
             <!--end::Title-->
 
@@ -24,7 +24,7 @@
         </div>
         <!--begin::Heading-->
 
-        <div class="mb-10 bg-light-info p-8 rounded"><div class="text-info"> Use account <strong>admin@demo.com</strong> and password <strong>demo</strong> to continue. </div></div>
+        {{-- <div class="mb-10 bg-light-info p-8 rounded"><div class="text-info"> Use account <strong>admin@demo.com</strong> and password <strong>demo</strong> to continue. </div></div> --}}
 
         <!--begin::Input group-->
         <div class="fv-row mb-10">
@@ -58,11 +58,11 @@
                 <!--end::Label-->
 
                 <!--begin::Link-->
-                @if (Route::has('password.request'))
+                {{-- @if (Route::has('password.request'))
                     <a href="{{ theme()->getPageUrl('password.request') }}" class="link-primary fs-6 fw-bolder">
                         {{ __('Forgot Password ?') }}
                     </a>
-            @endif
+            @endif --}}
             <!--end::Link-->
             </div>
             <!--end::Wrapper-->
@@ -77,7 +77,7 @@
         <div class="fv-row mb-10">
             <label class="form-check form-check-custom form-check-solid">
                 <input class="form-check-input" type="checkbox" name="remember"/>
-                <span class="form-check-label fw-bold text-gray-700 fs-6">{{ __('Remember me') }}
+                <span class="form-check-label fw-bold text-gray-700 fs-6 mx-10">{{ __('Remember me') }}
             </span>
             </label>
         </div>

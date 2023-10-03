@@ -37,9 +37,9 @@ use TCG\Voyager\Facades\Voyager;
 |
 */
 
-Route::get('/', function () {
-    return redirect('index');
-});
+// Route::get('/index', function () {
+//     return redirect('/');
+// });
 
 $menu = theme()->getMenu();
 array_walk($menu, function ($val) {
@@ -113,7 +113,7 @@ array_walk($menu, function ($val) {
     Route::resource('users', UsersController::class);
 // });
 
-// Route::get('/', [WelcomePageController::class, 'index'])->name('welcome');
+Route::get('/', [WelcomePageController::class, 'index'])->name('welcome');
 
 Route::prefix('shopping')->group(function () {
 // Shop and welcome

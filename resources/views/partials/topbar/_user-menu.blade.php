@@ -238,7 +238,7 @@
                     <input class="form-check-input w-30px h-20px" type="checkbox" value="1" name="skin" id="kt_user_menu_dark_mode_toggle" {{ theme()->isDarkMode() ? 'checked' : '' }} data-kt-url="{{ theme()->getPageUrl('index', '', theme()->isDarkMode() ? '' : 'dark') }}"/>
                     <span class="pulse-ring ms-n1"></span>
 
-                    <span class="form-check-label text-gray-600 fs-7">
+                    <span class="form-check-label text-gray-600 fs-7 mx-10">
                         {{ __('Dark Mode') }}
                     </span>
                 </label>

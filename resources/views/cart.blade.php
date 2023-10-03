@@ -98,10 +98,10 @@
                                         document.getElementById('delete-form').submit();">
                                         remove
                                     </button>
-                                    <button class="cart-option btn btn-success btn-sm custom-border" onclick="
+                                    {{-- <button class="cart-option btn btn-success btn-sm custom-border" onclick="
                                     document.getElementById('add-form').submit();">
                                         Add to cart
-                                    </button>
+                                    </button> --}}
                                 </td>
                                 <td>${{ format($item->model->price) }}</td>
                             </tr>

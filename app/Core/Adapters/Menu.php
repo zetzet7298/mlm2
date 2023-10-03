@@ -35,10 +35,10 @@ class Menu extends \App\Core\Menu
             return;
         }
 
-        $user = auth()->user();
+        // $user = auth()->user();
         // $admin_user = Role::where('name', 'admin')->orWhere('name', 'user')->pluck('id')->toArray();
-        $admin_user = [1,2];
-        $admin = 1;
+        // $admin_user = [1,2];
+        // $admin = 1;
         // check if the spatie plugin functions exist
 
         // if (!method_exists($user, 'hasAnyPermission') || !method_exists($user, 'hasAnyRole')) {
@@ -54,24 +54,47 @@ class Menu extends \App\Core\Menu
             //     unset($array[$key]);
             // }
 
-            if (isset($value['role']) && isset($user->role_id)) {
+            if (isset($value['role']) && isset(auth()->user()->role_id)) {
         // 
-                if($value['role'] == 'admin|user'){
-                    if(!in_array($user->role_id, $admin_user)){
-                        unset($array[$key]);
-                    }
-                }elseif($value['role'] == 'admin|member'){
-                    if($user->role_id == 1 || $user->type == AccountConstant::TYPE_USER_MEMBER){
+                // if($value['role'] == 'admin|user'){
+                //     if(!in_array($user->role_id, $admin_user)){
+                //         unset($array[$key]);
+                //     }
+                // }else
+                if($value['role'] == 'admin|member'){
+                    
+                    if(!empty(auth()->user()) && auth()->user()->type != AccountConstant::TYPE_USER_FREE){
                         continue;
                     }else{
                         unset($array[$key]);
                     }
                 }
-                elseif($value['role'] == 'admin'){
-                    if($user->role_id != 1){
+                elseif($value['role'] == 'user'){
+                    if(!empty(auth()->user())){
+                        continue;
+                    }else{
                         unset($array[$key]);
                     }
                 }
+                // elseif($value['role'] == 'all'){
+                //     if(!empty(auth()->user())){
+                //         continue;
+                //     }else{
+                //         unset($array[$key]);
+                //     }
+                // }
+                elseif($value['role'] == 'admin'){
+                    if(auth()->user()->role_id != 1){
+                        unset($array[$key]);
+                    }
+                }
+                else{
+                    unset($array[$key]);
+    
+                }
+            }else{
+                unset($array[$key]);
+
             }
 
             // if (isset($value['role_or_permission'])) {
