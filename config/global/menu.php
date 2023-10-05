@@ -506,6 +506,12 @@ return array(
                 'items' => array(
             'role' => 'admin|member',
                     array(
+                        'title'  => 'Customer Gratitude',
+                        'path'   => 'customer/gratitude',
+                        'bullet' => '<span class="bullet bullet-dot"></span>',
+                    ),
+            'role' => 'admin|member',
+                    array(
                         'title'  => 'Product List',
                         'path'   => 'management/products',
                         'bullet' => '<span class="bullet bullet-dot"></span>',

@@ -98,6 +98,7 @@ array_walk($menu, function ($val) {
         Route::get('management/order', [OrderController::class, 'index']);
         Route::get('management/order/{id}', [OrderController::class, 'show'])->name('order.detail');
         Route::get('gift', [GiftController::class, 'index']);
+        Route::get('customer/gratitude', [GiftController::class, 'gratitude']);
 
         Route::prefix('wallet')->name('wallet.')->group(function () {
             Route::get('upgrade', [WalletController::class, 'indexUpgrade'])->name('upgrade.index');

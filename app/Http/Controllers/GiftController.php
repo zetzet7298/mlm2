@@ -17,6 +17,14 @@ class GiftController extends Controller
         return view('gift')->with([
         ]);
     }
+
+    public function gratitude()
+    {
+        // $order = Gift::inRandomGift()->take(6)->get();
+        return view('gratitude')->with([
+        ]);
+    }
+
     public function show($id)
     {
         $order = Gift::find($id);
