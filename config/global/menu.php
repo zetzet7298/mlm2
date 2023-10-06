@@ -506,12 +506,6 @@ return array(
                 'items' => array(
             'role' => 'admin|member',
                     array(
-                        'title'  => 'Customer Gratitude',
-                        'path'   => 'customer/gratitude',
-                        'bullet' => '<span class="bullet bullet-dot"></span>',
-                    ),
-            'role' => 'admin|member',
-                    array(
                         'title'  => 'Product List',
                         'path'   => 'management/products',
                         'bullet' => '<span class="bullet bullet-dot"></span>',
@@ -543,6 +537,11 @@ return array(
         //     'title'      => 'Order',
         //     'path'       => 'management/order',
         // ),
+        array(
+        'role' => 'admin|member',
+            'title'  => 'Customer Gratitude',
+            'path'   => 'customer/gratitude',
+        ),
         // // System
         // array(
         //     'title'      => 'System',

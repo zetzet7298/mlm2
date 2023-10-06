@@ -9,19 +9,13 @@
                     <h4 class="filter-header">
                         By Category
                     </h4>
+                    <div>
+                        <div class="scroll-x">
                     <ul class="filter-ul index-ul">
                         @foreach ($categories as $category)
                             <li class="index-li"><a class="text-center text-primary fs-6 fw-bold" href="{{ route('shop.index', ['category' => $category->slug]) }}">{{ $category->name }}</a></li>
                         @endforeach
                     </ul>
-                    {{-- <h4 class="filter-header">
-                        By Tag
-                    </h4>
-                    <ul class="filter-ul">
-                        @foreach ($tags as $tag)
-                            <li><a class="text-center {{ $tag->name == $tagName ? 'active-cat' : '' }}" href="{{ route('shop.index', ['tag' => $tag->slug]) }}">{{ $tag->name }}</a></li>
-                        @endforeach
-                    </ul> --}}
                 </div>
             </div>
             <!-- end filter section -->
