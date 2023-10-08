@@ -16,7 +16,7 @@
 @section('scripts')
 
 <script type="text/javascript">
-var countDownDate = new Date("Dec 12, 2024 8:00:00").getTime();
+var countDownDate = new Date("Dec 12, 2023 8:00:00").getTime();
 
 // Update the count down every 1 second
 var x = setInterval(function() {
