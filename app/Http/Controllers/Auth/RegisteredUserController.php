@@ -54,10 +54,10 @@ class RegisteredUserController extends Controller
             // 'password2'   => Hash::make($request->password2),
             'direct_user_id'      => $request->direct_user_id,
         ];
-        $count = User::where(['indirect_user_id' => $request->indirect_user_id])->count();
-        if($count < 2){
-            $data['indirect_user_id'] = $request->indirect_user_id;
-        }
+        // $count = User::where(['direct_user_id' => $request->direct_user_id])->count();
+        // if($count < 2){
+        //     $data['direct_user_id'] = $request->direct_user_id;
+        // }
         $user = User::create($data);
 
         event(new Registered($user));

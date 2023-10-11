@@ -436,26 +436,29 @@ class User extends \TCG\Voyager\Models\User
         $me = User::where(['id' => $user_id])->with(['parents'])->first();
         $user = $me->parents;
         while (!empty($user)) {
-            $calc_total = self::calc_total($user);
-            $totalLeft = $calc_total['totalLeft'];
-            $totalRight = $calc_total['totalRight'];
-            // $totalNode = $calc_total['total'];
-            $new_type = self::getAccountType($user['type'], $totalLeft, $totalRight);
-            // dump($totalLeft, $totalRight, $new_type);
-            // User::where(['id' => $user['id']])->update(['type' => $new_type]);
-            $content = "quick bonus commissions";
-            Income::create([
-                'user_id'        => $user['id'],
-                'coin'             => AccountConstant::INDIRECT_COMISSION,
-                'content'             => $content,
-            ]);
-            // dd(Income::where('user_id', $user->id)->first());
-
-            User::where(['id' => $user['id']])->update([
-                'type' => $new_type,
-                'coin' => AccountConstant::INDIRECT_COMISSION + $user['coin'],
-                'commissions' => AccountConstant::INDIRECT_COMISSION + $user['commissions'],
-            ]);
+            if($user['level']<=12){
+                $calc_total = self::calc_total($user);
+                $totalLeft = $calc_total['totalLeft'];
+                $totalRight = $calc_total['totalRight'];
+                // $totalNode = $calc_total['total'];
+                $new_type = self::getAccountType($user['type'], $totalLeft, $totalRight);
+                // dump($totalLeft, $totalRight, $new_type);
+                // User::where(['id' => $user['id']])->update(['type' => $new_type]);
+                $content = "quick bonus commissions";
+                Income::create([
+                    'user_id'        => $user['id'],
+                    'coin'             => AccountConstant::INDIRECT_COMISSION,
+                    'content'             => $content,
+                ]);
+                // dd(Income::where('user_id', $user->id)->first());
+                
+                User::where(['id' => $user['id']])->update([
+                    'type' => $new_type,
+                    'coin' => AccountConstant::INDIRECT_COMISSION + $user['coin'],
+                    'commissions' => AccountConstant::INDIRECT_COMISSION + $user['commissions'],
+                ]);
+            }
+            
             // dd(User::find($user->id));
 
             $user = $user->parents;
