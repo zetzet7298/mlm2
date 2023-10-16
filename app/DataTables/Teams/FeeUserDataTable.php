@@ -41,7 +41,7 @@ class FeeUserDataTable extends DataTable
                 return date($model->created_at->format('d-m-Y H:i:s'));
             })
             ->addColumn('action', function (User $model) {
-                if($model->state == AccountConstant::USER_STATE_PAID){
+                if(!$model->is_agent){
                     return view('pages..teams.users._action-menu', compact('model'));
                 }
                 return '';
@@ -105,6 +105,11 @@ class FeeUserDataTable extends DataTable
             Column::make('email'),
             Column::make('coin'),
             Column::make('created_at'),
+            Column::computed('action')
+            ->exportable(false)
+            ->printable(false)
+            ->width(170)
+            ->addClass('text-center'),
         ];
     }
 

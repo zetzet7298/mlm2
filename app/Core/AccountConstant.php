@@ -17,7 +17,8 @@ class AccountConstant
     const TRANSFER_STATE_PAID = 1;
 
     const DIRECT_COMISSION = 10;
-    const INDIRECT_COMISSION = 1;
+    const INDIRECT_COMISSION = 0.4;
+    const AGENT_COMISSION = 4;
     const PERCENTAGE_COMISSION_SAPHIRE = 3;
     const PERCENTAGE_COMISSION_RUBY = 2;
     const PERCENTAGE_COMISSION_DIAMOND = 2;

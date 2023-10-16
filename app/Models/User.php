@@ -43,6 +43,7 @@ class User extends \TCG\Voyager\Models\User
         'coin',
         'state',
         'level',
+        'is_agent'
     ];
     public function username()
     {
@@ -435,8 +436,27 @@ class User extends \TCG\Voyager\Models\User
     {
         $me = User::where(['id' => $user_id])->with(['parents'])->first();
         $user = $me->parents;
+        $mylevel = $me->parent->level + 1;
+        $distance = $mylevel - 30;
+        $is_bonus_agent = false;
         while (!empty($user)) {
-            if($user['level']<=12){
+            if($user['level'] >= $distance){
+                if ($user['is_agent'] == true && $is_bonus_agent == false) {
+                    $is_bonus_agent = true;
+                    # code...
+                    $content = "agent commissions";
+                    Income::create([
+                        'user_id'        => $user['id'],
+                        'coin'             => AccountConstant::AGENT_COMISSION,
+                        'content'             => $content,
+                    ]);
+                    // dd(Income::where('user_id', $user->id)->first());
+                    
+                    User::where(['id' => $user['id']])->update([
+                        'coin' => AccountConstant::AGENT_COMISSION + $user['coin'],
+                        'commissions' => AccountConstant::AGENT_COMISSION + $user['commissions'],
+                    ]);
+                }
                 $calc_total = self::calc_total($user);
                 $totalLeft = $calc_total['totalLeft'];
                 $totalRight = $calc_total['totalRight'];
@@ -463,7 +483,6 @@ class User extends \TCG\Voyager\Models\User
 
             $user = $user->parents;
         }
-
         $old_direct_user = User::find($direct_user_id);
         User::where('id', $direct_user_id)->update([
             'coin' => AccountConstant::DIRECT_COMISSION + $old_direct_user['coin'],
@@ -518,7 +537,7 @@ class User extends \TCG\Voyager\Models\User
                 ]);
             }
         }
-        User::where('id', $user_id)->update(['level' => $me->parents->level + 1, 'state' => AccountConstant::USER_STATE_PAID]);
+        User::where('id', $user_id)->update(['level' => $mylevel, 'state' => AccountConstant::USER_STATE_PAID]);
 
         // $users = self::with(['allChildren'])
         //     ->orderBy('created_at')

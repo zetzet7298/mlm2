@@ -39,7 +39,7 @@ class UsersSeeder extends Seeder
             'state' => AccountConstant::USER_STATE_PAID,
             'email_verified_at' => now(),
             'created_at' => now()->addMinute(1),
-            'level' => 1,
+            'level' => 0,
         ]);
 //         $user1 = User::create([
 //             //'id' => Str::uuid()->toString(),

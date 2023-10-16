@@ -30,7 +30,8 @@ class UserController extends Controller
         }
         DB::beginTransaction();
         try {
-            User::where('id', $id)->update(['state' => AccountConstant::USER_STATE_PAID, 'type' => AccountConstant::TYPE_USER_MEMBER]);
+            User::where('id', $id)->update(['is_agent' => true]);
+            // User::where('id', $id)->update(['state' => AccountConstant::USER_STATE_PAID, 'type' => AccountConstant::TYPE_USER_MEMBER]);
             // User::handleUpgrade($id, $user->direct_user_id);
             // auth()->user()->update([
             //     'direct_user_id' => $direct_user->id,
