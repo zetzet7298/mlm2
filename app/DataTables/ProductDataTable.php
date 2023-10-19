@@ -27,7 +27,12 @@ class ProductDataTable extends DataTable
                 return view('pages.products._image', compact('model'));
             })
             ->editColumn('price', function (Product $model) {
-                return number_format($model->price) . '$';
+                return number_format($model->price, 1) . '$';
+            })
+            ->editColumn('member_price', function (Product $model) {
+                if(!empty($model->member_price)){
+                    return number_format($model->member_price, 1) . '$';
+                }
             })
             ->editColumn('created_at', function (Product $model) {
                 return date($model->created_at->format('d-m-Y H:i:s'));
@@ -100,8 +105,8 @@ class ProductDataTable extends DataTable
             Column::make('name'),
             Column::make('image'),
             Column::make('details'),
-            Column::make('price'),
-            Column::make('quantity'),
+            Column::make('price')->title((__('Retail Price'))),
+            Column::make('member_price')->title((__('Member Price'))),
             Column::make('created_at'),
             Column::computed('action')
             ->exportable(false)

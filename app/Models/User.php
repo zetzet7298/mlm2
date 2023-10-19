@@ -440,6 +440,7 @@ class User extends \TCG\Voyager\Models\User
         $distance = $mylevel - 30;
         $is_bonus_agent = false;
         while (!empty($user)) {
+            $bonus = 0;
             if($user['level'] >= $distance){
                 if ($user['is_agent'] == true && $is_bonus_agent == false) {
                     $is_bonus_agent = true;
@@ -452,10 +453,11 @@ class User extends \TCG\Voyager\Models\User
                     ]);
                     // dd(Income::where('user_id', $user->id)->first());
                     
-                    User::where(['id' => $user['id']])->update([
-                        'coin' => AccountConstant::AGENT_COMISSION + $user['coin'],
-                        'commissions' => AccountConstant::AGENT_COMISSION + $user['commissions'],
-                    ]);
+                    // User::where(['id' => $user['id']])->update([
+                    //     'coin' => AccountConstant::AGENT_COMISSION + $user['coin'],
+                    //     'commissions' => AccountConstant::AGENT_COMISSION + $user['commissions'],
+                    // ]);
+                    $bonus += AccountConstant::AGENT_COMISSION;
                 }
                 $calc_total = self::calc_total($user);
                 $totalLeft = $calc_total['totalLeft'];
@@ -471,11 +473,11 @@ class User extends \TCG\Voyager\Models\User
                     'content'             => $content,
                 ]);
                 // dd(Income::where('user_id', $user->id)->first());
-                
+                $bonus += AccountConstant::INDIRECT_COMISSION;
                 User::where(['id' => $user['id']])->update([
                     'type' => $new_type,
-                    'coin' => AccountConstant::INDIRECT_COMISSION + $user['coin'],
-                    'commissions' => AccountConstant::INDIRECT_COMISSION + $user['commissions'],
+                    'coin' => $bonus + $user['coin'],
+                    'commissions' => $bonus + $user['commissions'],
                 ]);
             }
             

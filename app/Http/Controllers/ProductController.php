@@ -50,7 +50,7 @@ class ProductController extends Controller
             $product->user_id = auth()->user()->id;
             $product->name = $request->name;
             $product->price = $request->price;
-            $product->quantity = $request->quantity;
+            $product->member_price = $request->member_price;
             $product->details = $request->details;
             $product->description = $request->description;
             $product->category_id = $request->category;
@@ -102,7 +102,7 @@ class ProductController extends Controller
         try {
             $product->name = $request->name;
             $product->price = $request->price;
-            $product->quantity = $request->quantity;
+            $product->member_price = $request->member_price;
             $product->details = $request->details;
             $product->description = $request->description;
             $product->category_id = $request->category;

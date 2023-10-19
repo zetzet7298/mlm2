@@ -26,7 +26,7 @@ class UserDataTable extends DataTable
                 return substr($model->id, 0,5) . '..';
             })
             ->editColumn('coin', function (User $model) {
-                return number_format($model->coin) . '$';
+                return number_format($model->coin, 1) . '$';
             })
             ->editColumn('first_name', function (User $model) {
                 return $model ? $model->first_name . ' '. $model->last_name : '';

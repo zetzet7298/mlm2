@@ -1,8 +1,7 @@
 <x-auth-layout>
     <!--begin::Forgot Password Form-->
-    <form method="POST" action="{{ theme()->getPageUrl('password.email') }}" class="form w-100" novalidate="novalidate" id="kt_password_reset_form">
+    <form method="POST" action="{{route('account.forgotPassword')}}" class="form w-100" novalidate="novalidate" id="">
     @csrf
-
         <!--begin::Heading-->
         <div class="text-center mb-10">
             <!--begin::Title-->
@@ -13,22 +12,57 @@
 
             <!--begin::Link-->
             <div class="text-gray-400 fw-bold fs-4">
-                {{ __('Enter your email to reset your password.') }}
+                {{ __('Use level 2 password to recover password.') }}
             </div>
             <!--end::Link-->
         </div>
         <!--begin::Heading-->
+                <!--begin::Input group-->
+        <div class="fv-row mb-5">
+            <label class="form-label fw-bolder text-dark fs-6">{{ __('Username') }}</label>
+            <input required class="form-control form-control-lg form-control-solid" type="text" name="username" autocomplete="off"/>
+        </div>
+        <!--end::Input group-->
+    <!--begin::Input group-->
+        <!--begin::Input group-->
+        <div class="fv-row mb-5">
+            <label class="form-label fw-bolder text-dark fs-6">{{ __('Level 2 Password') }}</label>
+            <input required class="form-control form-control-lg form-control-solid" type="password" name="password2" autocomplete="off"/>
+        </div>
+        <!--end::Input group-->
+    <!--begin::Input group-->
+        <div class="mb-10 fv-row" data-kt-password-meter="true">
+            <!--begin::Wrapper-->
+            <div class="mb-1">
+                <!--begin::Label-->
+                <label class="form-label fw-bolder text-dark fs-6">
+                    {{ __('Password') }}
+                </label>
+                <!--end::Label-->
+
+                <!--begin::Input wrapper-->
+                <div class="position-relative mb-3">
+                    <input required class="form-control form-control-lg form-control-solid" type="password" name="password" autocomplete="off"/>
+
+                </div>
+                <!--end::Input wrapper-->
+
+            </div>
+            <!--end::Wrapper-->
+        </div>
+        <!--end::Input group--->
 
         <!--begin::Input group-->
-        <div class="fv-row mb-10">
-            <label class="form-label fw-bolder text-gray-900 fs-6">{{ __('Email') }}</label>
-            <input class="form-control form-control-solid" type="email" name="email" autocomplete="off" value="{{ old('email') }}" required autofocus/>
+        <div class="fv-row mb-5">
+            <label class="form-label fw-bolder text-dark fs-6">{{ __('Confirm Password') }}</label>
+            <input required class="form-control form-control-lg form-control-solid" type="password" name="password_confirmation" autocomplete="off"/>
         </div>
         <!--end::Input group-->
 
         <!--begin::Actions-->
         <div class="d-flex flex-wrap justify-content-center pb-lg-0">
-            <button type="submit" id="kt_password_reset_submit" class="btn btn-lg btn-primary fw-bolder me-4">
+            {{--  <input type="submit"/>  --}}
+            <button type="submit" id="" class="btn btn-lg btn-primary fw-bolder ">
                 @include('partials.general._button-indicator')
             </button>
 

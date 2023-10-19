@@ -58,7 +58,7 @@ return array(
         'assets' => array(
             'custom' => array(
                 'js' => array(
-                    'js/custom/authentication/password-reset/password-reset.js',
+                    // 'js/custom/authentication/password-reset/password-reset.js',
                 ),
             ),
         ),

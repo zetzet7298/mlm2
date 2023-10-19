@@ -13,7 +13,7 @@
                 <label class="form-label fw-bolder fs-6 text-gray-700 me-5">Account Balance</label>
                 <!--end::Label-->
                 <!--begin::Select-->
-                <span class="fs-6">{{ number_format(auth()->user()->coin) }}$</span>
+                <span class="fs-6">{{ number_format(auth()->user()->coin, 1) }}$</span>
                 <!--end::Select-->
             </div>
             <div class="mb-5">

@@ -27,7 +27,7 @@ class WithdrawalDataTable extends DataTable
                 return date($model->created_at->format('d-m-Y H:i:s'));
             })
             ->editColumn('coin', function (Withdrawal $model) {
-                return number_format($model->coin) . '$';
+                return number_format($model->coin, 1) . '$';
             })
             ->editColumn('user_id', function (Withdrawal $model) {
                 return $model->user ? $model->user->username : '';

@@ -16,9 +16,9 @@ function productImage($path) {
 function format($price) {
     // dump(gettype($price), $price);
     if(gettype($price) == 'string'){
-    return number_format(floatval(str_replace(',', '', $price)));
+    return number_format(floatval(str_replace(',', '', $price)), 1);
     }
-    return number_format($price);
+    return number_format($price, 1);
 }
 
 function str_limit($string, $limit) {

@@ -23,7 +23,7 @@ class FeeUserDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->editColumn('coin', function (User $model) {
-                return number_format($model->coin) . '$';
+                return number_format($model->coin, 1) . '$';
             })
             ->editColumn('id', function (User $model) {
                 return substr($model->id, 0,5) . '..';

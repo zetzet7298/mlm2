@@ -67,6 +67,7 @@ array_walk($menu, function ($val) {
             Route::put('security/password', [SecurityController::class, 'changePassword'])->name('security.changePassword');
             Route::put('security/password2', [SecurityController::class, 'changePassword2'])->name('security.changePassword2');
             Route::post('security/password2', [SecurityController::class, 'createPassword2'])->name('security.createPassword2');
+
         });
         // Logs pages
         Route::prefix('log')->name('log.')->group(function () {
@@ -115,6 +116,7 @@ array_walk($menu, function ($val) {
 // });
 
 Route::get('/', [WelcomePageController::class, 'index'])->name('welcome');
+Route::post('/account/forgot-password', [SecurityController::class, 'forgotPassword'])->name('account.forgotPassword');
 
 Route::prefix('shopping')->group(function () {
 // Shop and welcome
