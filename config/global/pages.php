@@ -146,9 +146,11 @@ return array(
                 'custom' => array(
                     'css' => array(
                         'plugins/custom/datatables/datatables.bundle.css',
+                        'plugins/custom/jstree/jstree.bundle.css',
                     ),
                     'js' => array(
                         'js/custom/team/system-tree.js',
+                        'plugins/custom/jstree/jstree.bundle.js',
                     ),
                 ),
             ),

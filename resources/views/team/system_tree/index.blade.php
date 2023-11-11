@@ -5,11 +5,8 @@
         <!--begin::Card body-->
         <div class="card-body pt-6 position-relative" id="kt_activities_body">
 
-            <div id="scroll" class="scroll position-relative text-center" {{-- data-kt-scroll="true" --}} {{--
-                data-kt-scroll-height="auto" --}} {{-- data-kt-scroll-wrappers="#kt_activities_body" --}} {{--
-                data-kt-scroll-dependencies="#kt_activities_header, #kt_activities_footer" --}} {{--
-                data-kt-scroll-offset="50px" --}}>
-                <div id="tree" class="tree" style="">
+            <div id="scroll" class="scroll">
+                {{-- <div id="tree" class="tree" style=""> --}}
                     {{-- @foreach ( $root as $k => $v )
                         
                     @endforeach --}}
@@ -35,9 +32,46 @@
                             </ul>
                         </li>
                     </ul> --}}
-                    <ul>
+                    {{-- <ul> --}}
+                        {{-- {!! $tree !!} --}}
+                    {{-- </ul> --}}
+                {{-- </div> --}}
+                <div id="kt_docs_jstree_basic">
+                    <ul> 
                         {!! $tree !!}
-                    </ul>
+                     </ul> 
+                    {{-- <ul>
+                        <li>
+                            Root node 1
+                            <ul>
+                                <li data-jstree='{ "selected" : true }'>
+                                    <a href="javascript:;">
+                                        Initially selected </a>
+                                </li>
+                                <li data-jstree='{ "icon" : "flaticon2-gear text-success " }'>
+                                    custom icon URL
+                                </li>
+                                <li data-jstree='{ "opened" : true }'>
+                                    initially open
+                                    <ul>
+                                        <li data-jstree='{ "disabled" : true }'>
+                                            Disabled Node
+                                        </li>
+                                        <li data-jstree='{ "type" : "file" }'>
+                                            Another node
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li data-jstree='{ "icon" : "flaticon2-rectangular text-danger" }'>
+                                    Custom icon class (bootstrap)
+                                </li>
+                            </ul>
+                        </li>
+                        <li data-jstree='{ "type" : "file" }'>
+                            <a href="http://www.keenthemes.com">
+                                Clickable link node </a>
+                        </li>
+                    </ul> --}}
                 </div>
             </div>
 
@@ -49,7 +83,25 @@
 
     <!--end::Card-->
     @section('scripts')
+    <script src="assets/plugins/custom/jstree/jstree.bundle.js"></script>
+    
     <script>
+        $('#kt_docs_jstree_basic').jstree({
+    "core" : {
+        "themes" : {
+            "responsive": false
+        }
+    },
+    "types" : {
+        "default" : {
+            "icon" : "fa fa-folder"
+        },
+        "file" : {
+            "icon" : "fa fa-file"
+        }
+    },
+    "plugins": ["types"]
+});
         $(document).ready(function(){
         var outerContent = $('.scroll');
         var innerContent = $('.scroll > div');

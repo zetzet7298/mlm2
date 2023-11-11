@@ -192,12 +192,20 @@ class User extends \TCG\Voyager\Models\User
         $avatar = $parent->avatar ? asset($parent->avatar) :  asset(theme()->getMediaUrlPath() . 'avatars/blank.png');
         # code...
         $full_name = $parent->first_name . ' ' . $parent->last_name;
-        array_push($new_data, "<li><a class='view_detail cursor-pointer' data-id='{$parent->id}' data-full_name='{$full_name}' data-level='{$level}'>
+        array_push($new_data, "<li data-jstree='{ \"icon\" : \"flaticon2-gear text-success \" }'>
+        <a class='view_detail cursor-pointer' data-id='{$parent->id}' data-full_name='{$full_name}' data-level='{$level}'>
         <div class='symbol symbol-20px symbol-sm-20px'>
-                                                                <img src='{$avatar}' alt=''>
+        <img src='{$avatar}' alt=''>
 
-                                                            </div>
+    </div>
         </a>");
+        // array_push($new_data, "<li>
+        // <a class='view_detail cursor-pointer' data-id='{$parent->id}' data-full_name='{$full_name}' data-level='{$level}'>
+        // <div class='symbol symbol-20px symbol-sm-20px'>
+        //                                                         <img src='{$avatar}' alt=''>
+
+        //                                                     </div>
+        // </a>");
         $children = $parent->allChildren;
 
         if ($children) {
